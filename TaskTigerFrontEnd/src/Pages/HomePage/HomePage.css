@@ -1,0 +1,96 @@
+.title {
+  position: relative;
+  margin-left: 2rem;
+  margin-top: 2rem;
+  font-size: 5rem;
+  font-weight: bold;
+}
+
+.sub-title {
+  font-size: 2rem;
+  font-weight: bolder;
+  margin-left: 1rem;
+}
+
+.home-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.home-description {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+}
+
+.description-text {
+  margin: 3rem;
+  text-align: center;
+  font-size: 1.3rem;
+  line-height: 2rem;
+}
+
+.description-text-title {
+  margin-bottom: 1rem;
+  font-weight: bolder;
+  font-size: 1.5rem;
+  text-shadow: 1px 1px black;
+}
+
+.home-form {
+  display: flex;
+  width: 60%;
+  flex-direction: column;
+}
+
+.home-form-form input {
+    width: 80%;
+    height: 2.4rem;
+    border-radius: 5px;
+    padding-left: 1rem;
+    font-size: 1rem;
+    border: none;
+    outline: none;
+    margin: 0.5rem;
+}
+
+#submit-btn {
+    margin-top: 2rem;
+    justify-self: center;
+    background-color: green;
+    color: var(--foreground-color);
+    font-weight: bold;
+    width: 85%;
+    padding-left: 0;
+}
+
+.isTasker-checkbox {
+display: flex;
+flex-direction: row;
+align-items: center;
+width: 90%;
+}
+
+#isTasker {
+    width: 10%;
+}
+
+#isTasker-label {
+    font-size: 1rem;
+    color: black;
+}
+
+.form-title {
+  text-align: left;
+  margin-bottom: 1rem;
+  font-weight: bolder;
+  font-size: 2.4rem;
+}
+
+.handyman-cards {
+
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-items: center;
+}

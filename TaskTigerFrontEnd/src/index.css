@@ -1,0 +1,13 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --background: linear-gradient(111.98deg, #32BEB2 52.35%, #75CAC6 52.35%);
+    --foreground-color: white;
+    background: var(--background) no-repeat;
+    color: var(--foreground-color);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
