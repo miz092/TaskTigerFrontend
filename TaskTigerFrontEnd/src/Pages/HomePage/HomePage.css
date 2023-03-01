@@ -20,7 +20,7 @@
 .home-description {
   display: flex;
   flex-direction: column;
-
+  flex-wrap: wrap;
   width: 100%;
 }
 
@@ -73,7 +73,7 @@ width: 90%;
 }
 
 #isTasker {
-    width: 10%;
+    width: 5rem;
 }
 
 #isTasker-label {
@@ -93,4 +93,25 @@ width: 90%;
     display: grid;
     grid-template-columns: auto auto;
     justify-items: center;
+}
+
+@media screen and (orientation: portrait) {
+  .home-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .title, .sub-title {
+    text-align: center;
+    margin-left: 0;
+  }
+
+  .home-form {
+    align-items: center;
+    text-align: center;
+  }
+
+  #isTasker-label {
+    text-align: left;
+  }
 }
