@@ -4,6 +4,7 @@
   margin-top: 2rem;
   font-size: 5rem;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .sub-title {
@@ -63,6 +64,7 @@
     font-weight: bold;
     width: 85%;
     padding-left: 0;
+    cursor: pointer;
 }
 
 .isTasker-checkbox {

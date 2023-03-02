@@ -1,11 +1,12 @@
 import React from "react";
 import "./HandymanCard.css";
+import handymanImage from "../../Images/handyman-janos.jpg"
 
 export default function HandymanCard() {
   return (
     <div className="handyman-card">
       <img
-        src="https://www.mrhandyman.com/assets/content/local-content-a-img.2101281614385.jpg"
+        src={handymanImage}
         className="handyman-card-image"
       />
       <div className="handyman-card-details">

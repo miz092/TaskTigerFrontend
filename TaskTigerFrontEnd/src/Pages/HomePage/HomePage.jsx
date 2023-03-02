@@ -1,15 +1,20 @@
 import React from "react";
-import HandymanCard from "../../Components/HandymanCard";
+import { useNavigate } from "react-router-dom";
+import HandymanCard from "../../Components/HandymanCard/HandymanCard";
+import Title from "../../Components/Title";
 import "./HomePage.css";
 
 export default function HomePage() {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    navigate("/myprofile");
+  }
+
   return (
     <div className="home-page">
-      <div className="title">
-        TaskTiger.
-        <div className="sub-title">Your Task, Our Hunt.</div>
-      </div>
-
+     <Title titleClass={"title"} subTitleClass={"sub-title"}/>
       <div className="home-container">
         <div className="home-description">
           <div className="description-text">
@@ -40,7 +45,7 @@ export default function HomePage() {
           <div className="form-title">Register here</div>
           <form className="home-form-form">
             <input name="name" placeholder="Your name"></input>
-            <input name="address" placeholder="Your address"></input>
+            <input name="phone" placeholder="Your phone number"></input>
             <input name="dob" type={"date"} id="dob"></input>
             <div className="isTasker-checkbox">
               <input name="isTasker" type={"checkbox"} id="isTasker"></input>
@@ -73,6 +78,7 @@ export default function HomePage() {
               type={"submit"}
               id="submit-btn"
               value={"Register"}
+              onClick={(e) => handleSubmit(e)}
             ></input>
           </form>
         </div>
