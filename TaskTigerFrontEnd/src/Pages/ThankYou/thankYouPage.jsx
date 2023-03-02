@@ -1,6 +1,6 @@
 import React from "react";
 import "./thankyouPage.css";
-import ThankYouCard from "../../Components/ThankYouPage/thankYouCard.jsx";
+import ThankYouCard from "../../Components/ThankYouCard/thankYouCard.jsx";
 
 export default function ThankYouPage() {
     return (
