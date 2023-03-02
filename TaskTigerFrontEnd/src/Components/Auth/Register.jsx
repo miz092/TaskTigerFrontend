@@ -16,9 +16,13 @@ export default function Register() {
     const [errorMessage, setErrorMessage] = useState(
         "Don't use your real passwords, the passwords on this page are not yet encrypted!"
       );
-    const [user, setUser] = useState(null);
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        JSON.parse(window.localStorage.getItem("user")) !== null ?
+        navigate("/myprofile") : null;
+      }, [])
 
     const handleSubmit = async (e) => {
       e.preventDefault();
@@ -45,7 +49,7 @@ export default function Register() {
         try {
           const user_id = await res.json();
           const userData = await (await fetch("/api/users/" + user_id)).json();
-          setUser(userData)
+          window.localStorage.setItem("user", JSON.stringify(userData));
           //setSignedInUser(userData);
           //navigate("/user/" + user_id);
           navigate("/myprofile")
@@ -122,6 +126,13 @@ export default function Register() {
     </form>
     <div className="error-message">{errorMessage}</div>
 
+    <div className="sign-in" onClick={() => navigate("/signin")}>
+            Already have an account?{" "}
+            <b>
+              Sign&nbsp;in
+            </b>
+            .
+          </div>
   </div>
   )
 }

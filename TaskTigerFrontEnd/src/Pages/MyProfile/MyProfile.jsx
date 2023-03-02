@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./MyProfile.css";
 import profileImage from "../../Images/handyman-janos.jpg";
 import ReservationCard from "../../Components/ReservationCard/ReservationCard";
+import { useNavigate } from "react-router-dom";
 
 export default function MyProfile() {
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    JSON.parse(window.localStorage.getItem("user")) === null ?
+    navigate("/") : null;
+  }, [])
+
   return (
     <div className="myprofile-page">
       <div className="myprofile-name">Jane Foster</div>

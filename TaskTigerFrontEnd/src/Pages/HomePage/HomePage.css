@@ -116,6 +116,17 @@
   width: 60%;
 }
 
+.sign-in {
+  text-align: center;
+  align-self: center;
+  margin: 1rem;
+  cursor: pointer;
+}
+
+.sign-in:hover {
+  text-decoration: underline;
+}
+
 @media screen and (orientation: portrait) {
   .home-container {
     flex-direction: column;
