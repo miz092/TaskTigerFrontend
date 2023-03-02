@@ -5,9 +5,14 @@
 
 :root {
     --background: linear-gradient(111.98deg, #32BEB2 52.35%, #75CAC6 52.35%);
-    --foreground-color: white;
+    --background-dark: linear-gradient(111.98deg, #134b46 52.35%, #467977 52.35%);
+    --primary-text-color: white;
     background: var(--background) no-repeat;
-    color: var(--foreground-color);
+    color: var(--primary-text-color);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+
+/* :root:has(#isTasker:checked) {
+    background: var(--background-dark);
+} */
