@@ -1,7 +1,13 @@
 import React from "react";
 import "./ConfirmationCard.css";
+import {useNavigate} from "react-router-dom";
 
 export default function ConfirmationCard() {
+    const navigate = useNavigate();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        navigate("/thankyou");
+    }
     return (
         <div className="confirmation-card">
             <div className="confirmation-card-title">Confirmation Details:</div>
@@ -45,7 +51,7 @@ export default function ConfirmationCard() {
                         </div>
                         <div> sending request</div>
                     </div>
-                        <hr/>
+                    <hr/>
                     <div className="confirmation-details-line-price">
                         <div className="confirmation-details-line-price">
                             <div>
@@ -66,8 +72,10 @@ export default function ConfirmationCard() {
                     </div>
                 </div>
                 <button className="buttonSubmit"
-                    onClick={(e) => handleSubmit(e)}
-                >Send request to Tasker(s)</button>
+                        type={"submit"}
+                        onClick={(e) => handleSubmit(e)}
+                >Send request to Tasker(s)
+                </button>
             </div>
         </div>
     );

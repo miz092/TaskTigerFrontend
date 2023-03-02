@@ -9,7 +9,7 @@
 
 .confirmation-card {
     min-width: 280px;
-    max-width: max-content;
+    /*max-width: max-content;*/
     display: flex;
     flex-direction: column;
     background-color: white;
