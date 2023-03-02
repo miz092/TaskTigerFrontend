@@ -43,44 +43,57 @@
   display: flex;
   width: 60%;
   flex-direction: column;
+  margin: 1rem;
 }
 
-.home-form-form input {
-    width: 80%;
-    height: 2.4rem;
-    border-radius: 5px;
-    padding-left: 1rem;
-    font-size: 1rem;
-    border: none;
-    outline: none;
-    margin: 0.5rem;
+.home-form-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* #gender {
+  width: 80%;
+  height: 2rem;
+} */
+
+.home-form-form input,
+.home-form-form select {
+  width: 80%;
+  height: 2.4rem;
+  border-radius: 5px;
+  padding-left: 1rem;
+  font-size: 1rem;
+  border: none;
+  outline: none;
+  margin: 0.5rem;
 }
 
 #submit-btn {
-    margin-top: 2rem;
-    justify-self: center;
-    background-color: green;
-    color: var(--foreground-color);
-    font-weight: bold;
-    width: 85%;
-    padding-left: 0;
-    cursor: pointer;
+  margin-top: 2rem;
+  justify-self: center;
+  background-color: green;
+  color: var(--foreground-color);
+  font-weight: bold;
+  width: 85%;
+  padding-left: 0;
+  cursor: pointer;
 }
 
 .isTasker-checkbox {
-display: flex;
-flex-direction: row;
-align-items: center;
-width: 90%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 90%;
 }
 
 #isTasker {
-    width: 5rem;
+  width: 5rem;
 }
 
 #isTasker-label {
-    font-size: 1rem;
-    color: black;
+  font-size: 1rem;
+  color: black;
 }
 
 .form-title {
@@ -91,10 +104,16 @@ width: 90%;
 }
 
 .handyman-cards {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-items: center;
+}
 
-    display: grid;
-    grid-template-columns: auto auto;
-    justify-items: center;
+.error-message {
+  color: rgb(168, 0, 0);
+  text-align: center;
+  align-self: center;
+  width: 60%;
 }
 
 @media screen and (orientation: portrait) {
@@ -103,7 +122,8 @@ width: 90%;
     align-items: center;
   }
 
-  .title, .sub-title {
+  .title,
+  .sub-title {
     text-align: center;
     margin-left: 0;
   }

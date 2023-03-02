@@ -10,8 +10,11 @@ export default function NavBar() {
     <>
       <nav className="navbar">
         <Title titleClass={"nav-title"} subTitleClass={"nav-sub-title"} />
-        <div className="nav-myprofile" onClick={() => navigate("/myprofile")}>
+        <div className="nav-button" onClick={() => navigate("/myprofile")}>
           My Profile
+        </div>
+        <div className="nav-button" onClick={() => navigate("/taskers")}>
+          Taskers
         </div>
       </nav>
       <Outlet />
