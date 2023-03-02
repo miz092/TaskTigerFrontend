@@ -1,0 +1,148 @@
+.confirmation-card-title {
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    color: #F6475F;
+    padding-left: 1rem;
+    font-weight: bold;
+}
+
+.confirmation-card {
+    min-width: 280px;
+    max-width: max-content;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 0.5rem;
+    margin: 2rem;
+    padding: 0.5rem;
+}
+
+.confirmation-card-details {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    color: black;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.confirmation-details-nameTag {
+    display: flex;
+    flex-direction: column;
+    color: black;
+    font-weight: bold;
+
+}
+
+.confirmation-details-line {
+    display: flex;
+    padding-top: 0.1rem;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.confirmation-details-taskerTag {
+    font-weight: bold;
+    margin-right: 0.5rem;
+}
+
+.confirmation-details-taskerName {
+    color: #008A05;
+}
+
+.confirmation-details-selectedPeopleBox {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
+.confirmation-details-taskerContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.confirmation-details-selectedPeopleBox-title {
+    margin-top: 0.2rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.confirmation-details-taskerTagAndName {
+    display: flex;
+}
+
+.confirmation-details-line-price {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.confirmation-details-line-total {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.confirmation-details-line-total-priceValue {
+    font-weight: bolder;
+}
+
+.buttonSubmit {
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 1rem;
+    border: thin;
+    border-radius: 3px;
+    background-color: #F6475F;
+}
+
+.buttonSubmit:hover {
+    background-color: greenyellow;
+    float: left;
+    color: white;
+    /*border: 1px solid green;*/
+
+}
+
+.buttonSubmit {
+    /*background: #FF4742;*/
+    border: 1px solid #F6475F;
+    border-radius: 6px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 16px;
+    line-height: 16px;
+    min-height: 40px;
+    outline: 0;
+    padding: 12px 14px;
+    text-align: center;
+    text-rendering: geometricprecision;
+    text-transform: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+}
+
+.buttonSubmit:hover,
+.buttonSubmit:active {
+    background-color: initial;
+    background-position: 0 0;
+    color: #FF4742;
+}
+
+.buttonSubmit:active {
+    opacity: .5;
+}
+
