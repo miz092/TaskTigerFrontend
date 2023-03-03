@@ -15,3 +15,4 @@ async function postReservation(data) {
 
   return responseData;
 }
+export { postReservation };
