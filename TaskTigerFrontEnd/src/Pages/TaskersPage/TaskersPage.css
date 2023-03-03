@@ -45,7 +45,7 @@
 .taskers-page-main {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 80%;
     margin: 2rem;
 }
 
@@ -59,8 +59,10 @@
 }
 
 .taskers-page-main-filter-title {
-    font-size: 1.4rem;
     color: black;
+    font-size: 1.4rem;
+    font-weight: bolder;
+    margin-bottom: 1rem;
 }
 
 .taskers-page-main-filter-address,
@@ -70,10 +72,28 @@
     flex-direction: row;
     margin: 1rem;
     justify-content: space-between;
+    align-items: center;
+}
+
+.taskers-page-main-filter-address-text,
+.taskers-page-main-filter-skills-text,
+.taskers-page-main-filter-wage-text {
+    font-weight: bolder;
+    margin-right: 1rem;
 }
 
 .taskers-page-main-filter-address input {
+    border-radius: 1rem;
+    border: none;
+    padding: 1rem;
+    font-size: 1rem;
+    margin: 0.5rem;
+}
 
+.skill-div {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
 }
 
 .skills-checkbox {

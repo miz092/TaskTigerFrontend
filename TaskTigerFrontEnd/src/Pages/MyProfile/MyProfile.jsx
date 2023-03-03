@@ -42,7 +42,8 @@ export default function MyProfile() {
             </ul>
           </div>
           <div className="myprofile-user-intro">
-            {user.shortIntroduction}
+          <div className="myprofile-user-intro-title">ABOUT ME</div>
+            <div className="myprofile-user-intro-text">{user.shortIntroduction}</div>
           </div>
         </div>
         <div className="myprofile-reservation-container">

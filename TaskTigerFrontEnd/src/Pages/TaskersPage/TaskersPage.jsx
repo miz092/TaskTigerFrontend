@@ -12,7 +12,9 @@ export default function TaskersPage() {
 const handleCheckbox = (e) => {
     e.target.checked ?
     filterSkills.push(e.target.labels[0].innerText) : null
+    console.log(filterSkills)
 }
+
 
   return (
     <div className="taskers-page">
@@ -100,6 +102,7 @@ const handleCheckbox = (e) => {
             <div className="taskers-page-main-filter-skills-text">
               by Skills:{" "}
             </div>
+            <div className="skill-div">
             <input
               name="skill-1"
               type={"checkbox"}
@@ -110,6 +113,8 @@ const handleCheckbox = (e) => {
             <label htmlFor="skill-1" id="skill-1-label">
               Skill 1
             </label>
+            </div>
+            <div className="skill-div">
             <input
               name="skill-2"
               type={"checkbox"}
@@ -120,6 +125,8 @@ const handleCheckbox = (e) => {
             <label htmlFor="skill-2" id="skill-2-label">
               Skill 2
             </label>
+            </div>
+            <div className="skill-div">
             <input
               name="skill-3"
               type={"checkbox"}
@@ -130,13 +137,14 @@ const handleCheckbox = (e) => {
             <label htmlFor="skill-3" id="skill-3-label">
               Skill 3
             </label>
+            </div>
           </div>
           <div className="taskers-page-main-filter-wage">
             <div className="taskers-page-main-filter-wage-text">
-              by Hourly wage:{" "}
+              by Hourly wage :{" "}
             </div>
-            <input name="wage" type={"range"} id={"filter-wage"} onChange={(e) => setFilterWage(e.target.value)}/>
-            <div id="filter-wage-value">{filterWage}</div>
+            <input name="wage" type={"range"} id={"filter-wage"} min={5} onChange={(e) => setFilterWage(e.target.value)}/>
+            <div id="filter-wage-value">{filterWage}$</div>
           </div>
         </div>
         <div className="taskers-page-main-list"></div>
