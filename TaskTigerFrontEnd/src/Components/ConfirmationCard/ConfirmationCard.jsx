@@ -4,14 +4,6 @@ import { useNavigate } from "react-router-dom";
 // import { postReservation } from "./confirmation";
 
 export default function ConfirmationCard({
-  client,
-  job,
-  duration,
-  address,
-  description,
-  message,
-  tasker,
-  workType,
 }) {
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
@@ -26,28 +18,28 @@ export default function ConfirmationCard({
         <div className="confirmation-details-line">
           <div className="confirmation-details-nameTag">Client:</div>
           <div className="confirmation-details-parameter">
-            {client.userName}
+            
           </div>
         </div>
         <div className="confirmation-details-line">
           <div className="confirmation-details-nameTag">Job:</div>
-          <div className="confirmation-details-parameter">{job}</div>
+          <div className="confirmation-details-parameter"></div>
         </div>
         <div className="confirmation-details-line">
           <div className="confirmation-details-nameTag">Duration:</div>
-          <div className="confirmation-details-parameter">{duration}</div>
+          <div className="confirmation-details-parameter"></div>
         </div>
         <div className="confirmation-details-line">
           <div className="confirmation-details-nameTag">Address:</div>
-          <div className="confirmation-details-parameter">{address}</div>
+          <div className="confirmation-details-parameter"></div>
         </div>
         <div className="confirmation-details-line">
           <div className="confirmation-details-nameTag">Description:</div>
-          <div className="confirmation-details-parameter">{description}</div>
+          <div className="confirmation-details-parameter"></div>
         </div>
         <div className="confirmation-details-line">
           <div className="confirmation-details-nameTag">Message:</div>
-          <div className="confirmation-details-parameter">{message}</div>
+          <div className="confirmation-details-parameter"></div>
         </div>
         <div className="confirmation-details-selectedPeopleBox">
           <div className="confirmation-details-selectedPeopleBox-title">
@@ -59,7 +51,7 @@ export default function ConfirmationCard({
             <div className="confirmation-details-taskerTagAndName">
               <div className="confirmation-details-taskerTag">Tasker:</div>
               <div className="confirmation-details-taskerName">
-                {tasker.userName}
+                
               </div>
             </div>
             <div> sending request</div>

@@ -1,14 +1,13 @@
 .taskers-page {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
     justify-content: center;
 }
 
 .taskers-page-sidebar {
   display: flex;
   flex-direction: column;
-  margin: 2rem;
+  margin: 1rem;
   width: fit-content;
 }
 
@@ -44,11 +43,10 @@
 }
 
 .taskers-page-main {
-    max-width: 500px;
-    /*display: flex;*/
-    /*flex-direction: row;*/
-    width: 80%;
-    /*margin: 2rem;*/
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
 }
 
 .taskers-page-main-list{
@@ -56,7 +54,6 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    align-content: flex-end;
 }
 
 .taskers-page-main-filter {
@@ -79,9 +76,10 @@
 .taskers-page-main-filter-skills,
 .taskers-page-main-filter-wage {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     margin: 1rem;
-    align-items: flex-start;
+    align-items: center;
 }
 
 .taskers-page-main-filter-address-text,
@@ -94,7 +92,7 @@
 .taskers-page-main-filter-address input {
     border-radius: 1rem;
     border: none;
-    padding: 1rem;
+    padding: 0.5rem;
     font-size: 1rem;
     margin: 0.5rem;
 }
@@ -103,6 +101,7 @@
     display: flex;
     flex-direction: row;
     gap: 1rem;
+    margin-right: 1rem;
 }
 
 .skills-checkbox {
@@ -117,4 +116,22 @@
 #filter-wage-value {
     font-weight: bolder;
     font-size: 1.2rem;
+}
+
+.taskers-page-form {
+    width: 100%;
+}
+
+#filter-submit-btn {
+    font-weight: bolder;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    background-color: green;
+    color: white;
+}
+
+.taskers-page-main-list-card {
+    width: 100%;
+    margin-right: 2rem;
+    cursor: pointer;
 }

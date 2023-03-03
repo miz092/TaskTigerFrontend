@@ -18,7 +18,7 @@ export default function NavBar() {
           My Profile
         </div>
         <div className="nav-button" onClick={() => navigate("/taskers")}>
-          GetTaskers
+          Taskers
         </div>
         {JSON.parse(window.localStorage.getItem("user")) !== null ? (
           <div
