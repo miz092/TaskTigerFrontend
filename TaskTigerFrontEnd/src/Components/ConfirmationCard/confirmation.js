@@ -1,4 +1,4 @@
-async function postReservation(data) {
+export async function postReservation(data) {
   const options = {
     method: "POST",
     headers: {
@@ -11,7 +11,5 @@ async function postReservation(data) {
     "http://localhost:8080/api/reservation",
     options
   );
-  const responseData = await response.json();
-
-  return responseData;
+  return await response.json();
 }

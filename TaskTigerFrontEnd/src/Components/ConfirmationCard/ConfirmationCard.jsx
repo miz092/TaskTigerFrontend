@@ -1,7 +1,7 @@
 import React from "react";
 import "./ConfirmationCard.css";
 import { useNavigate } from "react-router-dom";
-import { postReservation } from "./confirmation";
+// import { postReservation } from "./confirmation";
 
 export default function ConfirmationCard({
   client,
