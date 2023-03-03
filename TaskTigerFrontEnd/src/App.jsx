@@ -7,6 +7,7 @@ import HomePage from "./Pages/HomePage/HomePage";
 import MyProfile from "./Pages/MyProfile/MyProfile";
 import SignInPage from "./Pages/SignInPage/SignInPage";
 import TaskersPage from "./Pages/TaskersPage/TaskersPage";
+import ThankYouPage from "./Pages/ThankYou/thankYouPage";
 
 function App() {
   useEffect(() => {
@@ -24,6 +25,8 @@ function App() {
             <Route path="/taskers" element={<TaskersPage />} />
             <Route path="/signin" element={<SignInPage />} />
             <Route path="/confirmation" element={<ConfirmationPage />} />
+            <Route path="/thankyou" element={<ThankYouPage/>} />
+            
           </Route>
         </Routes>
       </Router>

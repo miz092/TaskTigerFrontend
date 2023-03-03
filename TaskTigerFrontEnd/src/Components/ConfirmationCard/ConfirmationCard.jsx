@@ -56,7 +56,7 @@ export default function ConfirmationCard({
             </div>
             <div style={{color:"blue"}}> sending request</div>
           </div>
-          <hr />
+          <hr id="hr"/>
           <div className="confirmation-details-line-price">
             <div className="confirmation-details-line-price">
               <div>2</div>

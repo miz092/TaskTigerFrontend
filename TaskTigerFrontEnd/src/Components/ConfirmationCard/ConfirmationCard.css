@@ -62,6 +62,7 @@
 .confirmation-details-taskerContainer {
     display: flex;
     justify-content: space-between;
+    padding-left: 1rem;
 }
 
 .confirmation-details-selectedPeopleBox-title {
@@ -149,3 +150,6 @@
     opacity: .5;
 }
 
+#hr {
+    margin: 1rem;
+}
