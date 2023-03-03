@@ -1,6 +1,8 @@
 .taskers-page {
-  display: flex;
-  flex-direction: row;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .taskers-page-sidebar {
@@ -15,7 +17,6 @@
   border-radius: 1rem;
   padding: 2rem;
   color: black;
-  height: 100%;
 }
 
 .taskers-page-sidebar-calendar-title {
@@ -43,10 +44,19 @@
 }
 
 .taskers-page-main {
-    display: flex;
-    flex-direction: column;
+    max-width: 500px;
+    /*display: flex;*/
+    /*flex-direction: row;*/
     width: 80%;
-    margin: 2rem;
+    /*margin: 2rem;*/
+}
+
+.taskers-page-main-list{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    align-content: flex-end;
 }
 
 .taskers-page-main-filter {
@@ -69,10 +79,9 @@
 .taskers-page-main-filter-skills,
 .taskers-page-main-filter-wage {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     margin: 1rem;
-    justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .taskers-page-main-filter-address-text,
