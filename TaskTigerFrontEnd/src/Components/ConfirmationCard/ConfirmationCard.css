@@ -41,6 +41,7 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+    gap: 0.5rem;
 }
 
 .confirmation-details-taskerTag {
@@ -109,12 +110,14 @@
     background-color: greenyellow;
     float: left;
     color: white;
+    transition: 250ms;
     /*border: 1px solid green;*/
 
 }
 
 .buttonSubmit {
     /*background: #FF4742;*/
+    transition: 250ms;
     border: 1px solid #F6475F;
     border-radius: 6px;
     box-sizing: border-box;

@@ -18,43 +18,43 @@ export default function ConfirmationCard({
         <div className="confirmation-details-line">
           <div className="confirmation-details-nameTag">Client:</div>
           <div className="confirmation-details-parameter">
-            
+            client username
           </div>
         </div>
         <div className="confirmation-details-line">
           <div className="confirmation-details-nameTag">Job:</div>
-          <div className="confirmation-details-parameter"></div>
+          <div className="confirmation-details-parameter">job</div>
         </div>
         <div className="confirmation-details-line">
           <div className="confirmation-details-nameTag">Duration:</div>
-          <div className="confirmation-details-parameter"></div>
+          <div className="confirmation-details-parameter">duration</div>
         </div>
         <div className="confirmation-details-line">
           <div className="confirmation-details-nameTag">Address:</div>
-          <div className="confirmation-details-parameter"></div>
+          <div className="confirmation-details-parameter">101001 Address street 01</div>
         </div>
         <div className="confirmation-details-line">
           <div className="confirmation-details-nameTag">Description:</div>
-          <div className="confirmation-details-parameter"></div>
+          <div className="confirmation-details-parameter">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, neque!</div>
         </div>
         <div className="confirmation-details-line">
           <div className="confirmation-details-nameTag">Message:</div>
-          <div className="confirmation-details-parameter"></div>
+          <div className="confirmation-details-parameter">Lorem ipsum dolor sit amet.</div>
         </div>
         <div className="confirmation-details-selectedPeopleBox">
           <div className="confirmation-details-selectedPeopleBox-title">
-            <div className="confirmation-details-nameTag">Selected people</div>
-            <div className="confirmation-details-nameTag">Request status</div>
+            <div className="confirmation-details-nameTag">Selected people:</div>
+            <div className="confirmation-details-nameTag">Request status:</div>
           </div>
 
           <div className="confirmation-details-taskerContainer">
             <div className="confirmation-details-taskerTagAndName">
               <div className="confirmation-details-taskerTag">Tasker:</div>
               <div className="confirmation-details-taskerName">
-                
+                Señor Tasker
               </div>
             </div>
-            <div> sending request</div>
+            <div style={{color:"blue"}}> sending request</div>
           </div>
           <hr />
           <div className="confirmation-details-line-price">
