@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./TaskersPage.css";
+import { useEffect } from "react";
 
 export default function TaskersPage() {
   const [filterCountry, setFilterCountry] = useState("");
@@ -8,11 +9,20 @@ export default function TaskersPage() {
   const [filterSkills, setFilterSkills] = useState([]);
   const [filterWage, setFilterWage] = useState(0);
 
+  const [users, setUsers] = useState(null);
 
-const handleCheckbox = (e) => {
-    e.target.checked ?
-    filterSkills.push(e.target.labels[0].innerText) : null
-}
+  useEffect(() => {
+    async function fetchData() {
+      const response = await fetch("/api/users/tasker/all");
+      const data = await response.json();
+      setUsers(data);
+    }
+    fetchData();
+  }, []);
+  console.log(users);
+  const handleCheckbox = (e) => {
+    e.target.checked ? filterSkills.push(e.target.labels[0].innerText) : null;
+  };
 
   return (
     <div className="taskers-page">
@@ -135,7 +145,12 @@ const handleCheckbox = (e) => {
             <div className="taskers-page-main-filter-wage-text">
               by Hourly wage:{" "}
             </div>
-            <input name="wage" type={"range"} id={"filter-wage"} onChange={(e) => setFilterWage(e.target.value)}/>
+            <input
+              name="wage"
+              type={"range"}
+              id={"filter-wage"}
+              onChange={(e) => setFilterWage(e.target.value)}
+            />
             <div id="filter-wage-value">{filterWage}</div>
           </div>
         </div>
