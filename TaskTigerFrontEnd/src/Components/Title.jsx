@@ -11,7 +11,7 @@ export default function Title({titleClass, subTitleClass}) {
   return (
     <div className={titleClass} onClick={() => goHome()}>
     TaskTiger.
-    <div className={subTitleClass}>Your Task, Our Hunt.</div>
+    <div className={subTitleClass}>Your Task, Our <span id='hunt'>Hunt</span>.</div>
   </div>
   )
 }

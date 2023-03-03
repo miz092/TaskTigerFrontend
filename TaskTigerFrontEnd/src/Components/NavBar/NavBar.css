@@ -22,12 +22,27 @@
   margin-left: 0.5rem;
 }
 
-.nav-myprofile {
-  cursor: pointer;
-  position: relative;
+#hunt {
+  transition: 500ms;
 }
 
-.nav-myprofile:before {
+.nav-title:hover #hunt {
+  color: brown;
+  transition: 500ms;
+}
+
+.nav-button {
+  cursor: pointer;
+  position: relative;
+  transition: 250ms;
+}
+
+.nav-button:hover {
+  transition: 250ms;
+  transform: scale(1.2);
+}
+
+.nav-button:before {
   content: "";
   position: absolute;
   height: 2px;
@@ -39,7 +54,7 @@
   transition: 500ms;
 }
 
-.nav-myprofile:hover::before {
+.nav-button:hover::before {
   transition: 500ms;
   transform: scaleX(1);
 }

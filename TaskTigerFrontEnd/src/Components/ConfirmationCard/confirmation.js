@@ -13,3 +13,4 @@ export async function postReservation(data) {
   );
   return await response.json();
 }
+export { postReservation };

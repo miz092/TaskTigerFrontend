@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import Register from "../../Components/Auth/Register";
 import HandymanCard from "../../Components/HandymanCard/HandymanCard";
 import Title from "../../Components/Title";
 import "./HomePage.css";
@@ -11,7 +12,6 @@ const fetchUsers = (signal) => {
 
 export default function HomePage() {
     const [users, setUsers] = useState(null);
-    const navigate = useNavigate();
 
     useEffect(() => {
         const controller = new AbortController();
@@ -28,10 +28,6 @@ export default function HomePage() {
             });
         return () => controller.abort();
     }, []);
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        navigate("/myprofile");
-    }
 
     return (
         <div className="home-page">
@@ -73,51 +69,12 @@ export default function HomePage() {
                                 })};
                             </div>
                         </div>
-                        <div className="home-form">
-                            <div className="form-title">Register here</div>
-                            <form className="home-form-form">
-                                <input name="name" placeholder="Your name"></input>
-                                <input name="phone" placeholder="Your phone number"></input>
-                                <input name="dob" type={"date"} id="dob"></input>
-                                <div className="isTasker-checkbox">
-                                    <input name="isTasker" type={"checkbox"} id="isTasker"></input>
-                                    <label htmlFor="isTasker" id="isTasker-label">
-                                        I want to be a Tasker!
-                                        <br/>
-                                        <span style={{fontSize: "0.7rem", color: "rgb(68,68,68)"}}>
-                  This way you will be able to receive tasks and earn money! You
-                  can specify your expertise on your profile page.
-                </span>
-                                    </label>
-                                </div>
-                                <input
-                                    name="email"
-                                    type={"email"}
-                                    placeholder="Your email address"
-                                ></input>
-                                <input
-                                    name="password"
-                                    type={"password"}
-                                    placeholder="Your password"
-                                ></input>
-                                <input
-                                    name="password-again"
-                                    type={"password"}
-                                    placeholder="Your password again"
-                                ></input>
-                                <input
-                                    name="submit"
-                                    type={"submit"}
-                                    id="submit-btn"
-                                    value={"Register"}
-                                    onClick={(e) => handleSubmit(e)}
-                                ></input>
-                            </form>
-                        </div>
+                      <Register />
                     </div>
                 </>
             ) : (
                 <Loading/>)}
         </div>
+        
     );
 }
