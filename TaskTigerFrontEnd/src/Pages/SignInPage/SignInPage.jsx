@@ -13,29 +13,26 @@ export default function SignInPage() {
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    // e.preventDefault();
+    e.preventDefault();
 
-    //   const res = await fetch(`/api/users/`, {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({
-    //       username: username,
-    //       password: password,
-    //     }),
-    //   });
+      const res = await fetch(`/api/users/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userName: username,
+          password: password,
+        }),
+      });
 
-    //   try {
-    //     const user_id = await res.json();
-    //     const userData = await (await fetch("/api/users/" + user_id)).json();
-    //     window.localStorage.setItem("user", JSON.stringify(userData));
-    //     //setSignedInUser(userData);
-    //     //navigate("/user/" + user_id);
-    //     navigate("/myprofile")
-    //   } catch (error) {
-    //     setErrorMessage("Invalid username or password.");
-    //   }
+      try {
+        const userData = await res.json();
+        localStorage.setItem("user", JSON.stringify(userData));
+        navigate("/myprofile")
+      } catch (error) {
+        setErrorMessage("Invalid username or password.");
+      }
     }
 
   return (

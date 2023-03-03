@@ -34,7 +34,9 @@
   border-radius: 50%;
   align-self: center;
   margin-bottom: 1rem;
-  border: 0.3rem solid white;
+  border: 0.2rem solid black;
+  box-shadow: 10px 10px 10px black;
+
 }
 
 .myprofile-image {
@@ -47,11 +49,26 @@
   flex-direction: column;
   background-color: bisque;
   border-radius: 1rem;
-  padding: 2rem;
+  padding-right: 2rem;
+  padding-left: 2rem;
+  padding-bottom: 2rem;
   color: black;
   margin: 1rem;
   width: 50%;
   text-align: center;
+  position: relative;
+  box-shadow: 10px 10px 10px black;
+}
+
+.myprofile-user-info li {
+  margin: 0.2rem;
+}
+
+.myprofile-user-info-title {
+  font-size: 1.6rem;
+  font-weight: bold;
+  padding: 0.2rem;
+  margin-bottom: 1rem;
 }
 
 .myprofile-user-intro {
@@ -61,6 +78,7 @@
   color: black;
   margin: 1rem;
   width: 50%;
+  box-shadow: 10px 10px 10px black;
 }
 
 .myprofile-reservation-container {
@@ -73,11 +91,13 @@
   color: black;
   margin: 2rem;
   margin-left: 1rem;
+  box-shadow: 10px 10px 10px black;
+
 }
 
 .myprofile-reservation-container-title {
-    font-size: 3rem;
-    text-align: center;
-    font-weight: bolder;
-    margin-bottom: 2rem;
+  font-size: 3rem;
+  text-align: center;
+  font-weight: bolder;
+  margin-bottom: 2rem;
 }

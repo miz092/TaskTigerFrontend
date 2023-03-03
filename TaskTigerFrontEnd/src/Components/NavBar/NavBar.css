@@ -20,11 +20,23 @@
   font-size: 1rem;
   font-weight: bolder;
   margin-left: 0.5rem;
+  transition: 250ms;
+}
+
+.nav-title:hover .nav-subtitle {
+  transition: 250ms;
+  color: brown;
 }
 
 .nav-button {
   cursor: pointer;
   position: relative;
+  transition: 250ms;
+}
+
+.nav-button:hover {
+  transition: 250ms;
+  transform: scale(1.2);
 }
 
 .nav-button:before {

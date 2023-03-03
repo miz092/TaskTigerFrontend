@@ -1,0 +1,91 @@
+.taskers-page {
+  display: flex;
+  flex-direction: row;
+}
+
+.taskers-page-sidebar {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem;
+  width: fit-content;
+}
+
+.taskers-page-sidebar-calendar {
+  background-color: bisque;
+  border-radius: 1rem;
+  padding: 2rem;
+  color: black;
+  height: 100%;
+}
+
+.taskers-page-sidebar-calendar-title {
+  font-size: 1.4rem;
+  font-weight: bolder;
+  margin-bottom: 1rem;
+}
+
+.taskers-page-sidebar-calendar-calendar {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto auto;
+    gap: 1rem;
+}
+
+.day {
+    text-align: center;
+    width: 2rem;
+    height: 2rem;
+    background-color: rgb(155, 237, 155);
+    border-radius: 100%;
+}
+
+.hour {
+    font-weight: bolder;
+}
+
+.taskers-page-main {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 2rem;
+}
+
+.taskers-page-main-filter {
+    display: flex;
+    flex-direction: column;
+    background-color: bisque;
+    border-radius: 1rem;
+    padding: 2rem;
+    color: black;
+}
+
+.taskers-page-main-filter-title {
+    font-size: 1.4rem;
+    color: black;
+}
+
+.taskers-page-main-filter-address,
+.taskers-page-main-filter-skills,
+.taskers-page-main-filter-wage {
+    display: flex;
+    flex-direction: row;
+    margin: 1rem;
+    justify-content: space-between;
+}
+
+.taskers-page-main-filter-address input {
+
+}
+
+.skills-checkbox {
+
+}
+
+#filter-wage {
+    width: 100%;
+    margin-right: 1rem;
+}
+
+#filter-wage-value {
+    font-weight: bolder;
+    font-size: 1.2rem;
+}

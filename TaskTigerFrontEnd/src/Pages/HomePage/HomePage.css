@@ -5,6 +5,7 @@
   font-size: 5rem;
   font-weight: bold;
   cursor: pointer;
+  width: fit-content;
 }
 
 .sub-title {
