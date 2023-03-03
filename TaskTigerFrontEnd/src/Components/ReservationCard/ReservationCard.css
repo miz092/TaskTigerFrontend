@@ -3,9 +3,11 @@
   flex-direction: column;
   background-color: white;
   border-radius: 0.5rem;
+  border: 2px solid black;
   width: 80%;
   margin: 1rem;
   padding: 0.5rem;
+  cursor: pointer;
 }
 
 .reservation-card-date {
@@ -21,6 +23,7 @@
   align-items: center;
   gap: 1rem;
   font-size: 1.3rem;
+
 }
 
 .reservation-card-image-div {

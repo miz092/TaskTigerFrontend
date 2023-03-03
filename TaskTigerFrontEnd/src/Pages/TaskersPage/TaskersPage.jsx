@@ -110,48 +110,55 @@ export default function TaskersPage() {
             <div className="taskers-page-main-filter-skills-text">
               by Skills:{" "}
             </div>
-            <input
-              name="skill-1"
-              type={"checkbox"}
-              id={"skill-1"}
-              className={"skills-checkbox"}
-              onChange={(e) => handleCheckbox(e)}
-            ></input>
-            <label htmlFor="skill-1" id="skill-1-label">
-              Skill 1
-            </label>
-            <input
-              name="skill-2"
-              type={"checkbox"}
-              id={"skill-2"}
-              className={"skills-checkbox"}
-              onChange={(e) => handleCheckbox(e)}
-            ></input>
-            <label htmlFor="skill-2" id="skill-2-label">
-              Skill 2
-            </label>
-            <input
-              name="skill-3"
-              type={"checkbox"}
-              id={"skill-3"}
-              className={"skills-checkbox"}
-              onChange={(e) => handleCheckbox(e)}
-            ></input>
-            <label htmlFor="skill-3" id="skill-3-label">
-              Skill 3
-            </label>
+            <div className="skill-div">
+              <input
+                name="skill-1"
+                type={"checkbox"}
+                id={"skill-1"}
+                className={"skills-checkbox"}
+                onChange={(e) => handleCheckbox(e)}
+              ></input>
+              <label htmlFor="skill-1" id="skill-1-label">
+                Skill 1
+              </label>
+            </div>
+            <div className="skill-div">
+              <input
+                name="skill-2"
+                type={"checkbox"}
+                id={"skill-2"}
+                className={"skills-checkbox"}
+                onChange={(e) => handleCheckbox(e)}
+              ></input>
+              <label htmlFor="skill-2" id="skill-2-label">
+                Skill 2
+              </label>
+            </div>
+            <div className="skill-div">
+              <input
+                name="skill-3"
+                type={"checkbox"}
+                id={"skill-3"}
+                className={"skills-checkbox"}
+                onChange={(e) => handleCheckbox(e)}
+              ></input>
+              <label htmlFor="skill-3" id="skill-3-label">
+                Skill 3
+              </label>
+            </div>
           </div>
           <div className="taskers-page-main-filter-wage">
             <div className="taskers-page-main-filter-wage-text">
-              by Hourly wage:{" "}
+              by Hourly wage :{" "}
             </div>
             <input
               name="wage"
               type={"range"}
               id={"filter-wage"}
+              min={5}
               onChange={(e) => setFilterWage(e.target.value)}
             />
-            <div id="filter-wage-value">{filterWage}</div>
+            <div id="filter-wage-value">{filterWage}$</div>
           </div>
         </div>
         <div className="taskers-page-main-list"></div>
