@@ -18,16 +18,16 @@ export default function ConfirmationCard({
         <div className="confirmation-details-line">
           <div className="confirmation-details-nameTag">Client:</div>
           <div className="confirmation-details-parameter">
-            client username
+          Señor Client
           </div>
         </div>
         <div className="confirmation-details-line">
           <div className="confirmation-details-nameTag">Job:</div>
-          <div className="confirmation-details-parameter">job</div>
+          <div className="confirmation-details-parameter">Best job in the world</div>
         </div>
         <div className="confirmation-details-line">
           <div className="confirmation-details-nameTag">Duration:</div>
-          <div className="confirmation-details-parameter">duration</div>
+          <div className="confirmation-details-parameter">65 years</div>
         </div>
         <div className="confirmation-details-line">
           <div className="confirmation-details-nameTag">Address:</div>
