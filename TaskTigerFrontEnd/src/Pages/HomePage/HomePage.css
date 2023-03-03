@@ -1,48 +1,55 @@
 .title {
-  position: relative;
-  margin-left: 2rem;
-  margin-top: 2rem;
-  font-size: 5rem;
-  font-weight: bold;
-  cursor: pointer;
+    position: relative;
+    margin-left: 2rem;
+    margin-top: 2rem;
+    font-size: 5rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.lds-ellipsis {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
 }
 
 .sub-title {
-  font-size: 2rem;
-  font-weight: bolder;
-  margin-left: 1rem;
+    font-size: 2rem;
+    font-weight: bolder;
+    margin-left: 1rem;
 }
 
 .home-container {
-  display: flex;
-  flex-direction: row;
+    display: flex;
+    flex-direction: row;
 }
 
 .home-description {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
 }
 
 .description-text {
-  margin: 3rem;
-  text-align: center;
-  font-size: 1.3rem;
-  line-height: 2rem;
+    margin: 3rem;
+    text-align: center;
+    font-size: 1.3rem;
+    line-height: 2rem;
 }
 
 .description-text-title {
-  margin-bottom: 1rem;
-  font-weight: bolder;
-  font-size: 1.5rem;
-  text-shadow: 1px 1px black;
+    margin-bottom: 1rem;
+    font-weight: bolder;
+    font-size: 1.5rem;
+    text-shadow: 1px 1px black;
 }
 
 .home-form {
-  display: flex;
-  width: 60%;
-  flex-direction: column;
+    display: flex;
+    width: 60%;
+    flex-direction: column;
 }
 
 .home-form-form input {
@@ -60,7 +67,7 @@
     margin-top: 2rem;
     justify-self: center;
     background-color: green;
-    color: var(--foreground-color);
+    color: white;
     font-weight: bold;
     width: 85%;
     padding-left: 0;
@@ -68,10 +75,10 @@
 }
 
 .isTasker-checkbox {
-display: flex;
-flex-direction: row;
-align-items: center;
-width: 90%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 90%;
 }
 
 #isTasker {
@@ -84,10 +91,10 @@ width: 90%;
 }
 
 .form-title {
-  text-align: left;
-  margin-bottom: 1rem;
-  font-weight: bolder;
-  font-size: 2.4rem;
+    text-align: left;
+    margin-bottom: 1rem;
+    font-weight: bolder;
+    font-size: 2.4rem;
 }
 
 .handyman-cards {
@@ -98,22 +105,22 @@ width: 90%;
 }
 
 @media screen and (orientation: portrait) {
-  .home-container {
-    flex-direction: column;
-    align-items: center;
-  }
+    .home-container {
+        flex-direction: column;
+        align-items: center;
+    }
 
-  .title, .sub-title {
-    text-align: center;
-    margin-left: 0;
-  }
+    .title, .sub-title {
+        text-align: center;
+        margin-left: 0;
+    }
 
-  .home-form {
-    align-items: center;
-    text-align: center;
-  }
+    .home-form {
+        align-items: center;
+        text-align: center;
+    }
 
-  #isTasker-label {
-    text-align: left;
-  }
+    #isTasker-label {
+        text-align: left;
+    }
 }
