@@ -6,76 +6,85 @@ import { useNavigate } from "react-router-dom";
 
 export default function MyProfile() {
   const [user, setUser] = useState(null);
-
+  const isLoggedIn =
+    localStorage.getItem("token") !== null &&
+    localStorage.getItem("token") !== "null";
   const navigate = useNavigate();
 
   useEffect(() => {
-    window.localStorage.getItem("token") === null ?
-    navigate("/") : null;
+    !isLoggedIn ? navigate("/") : null;
 
     async function fetchData() {
-    const res = await fetch(`/api/users/authenticate`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${localStorage.getItem("token")}`
-      },
-    });
+      const res = await fetch(`/api/users/authenticate`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
 
-    try {
-      const user = await res.json();
-      console.log(user)
-      setUser(user)
-    } catch(error) {
-      console.log(error)
+      try {
+        const user = await res.json();
+        console.log(user);
+        setUser(user);
+      } catch (error) {
+        console.log(error);
+      }
     }
-  }
 
-  fetchData()
-  }, [])
+    fetchData();
+  }, []);
 
   const getAge = (birthDate) => {
-    const thisDate = new Date()
-    const dob = new Date(birthDate)
-    const thisYear = thisDate.getFullYear()
-    const dobYear = dob.getFullYear()
-    return thisDate > dob ? thisYear-dobYear-1 : thisYear-dobYear;
-  }
-
+    const thisDate = new Date();
+    const dob = new Date(birthDate);
+    const thisYear = thisDate.getFullYear();
+    const dobYear = dob.getFullYear();
+    return thisDate > dob ? thisYear - dobYear - 1 : thisYear - dobYear;
+  };
 
   return user ? (
     <div className="myprofile-page">
-      <div className="myprofile-name">{user.firstName + " " + user.lastName}</div>
+      <div className="myprofile-name">
+        {user.firstName + " " + user.lastName}
+      </div>
       <div className="myprofile-details">
         <div className="myprofile-user-details">
           <div className="myprofile-image-div">
             <img src={profileImage} className="myprofile-image" />
           </div>
           <div className="myprofile-user-info">
-            <div className="myprofile-user-info-title">{user.isTasker ? "TASKER" : "CLIENT" }</div>
+            <div className="myprofile-user-info-title">
+              {user.isTasker ? "TASKER" : "CLIENT"}
+            </div>
             <div className="myprofile-user-info-text">
-            <ul>
-              <li>{user.username}</li>
-              <li>{getAge(user.dob)}</li>
-              <li>{user.gender}</li>
-              <li>member since {new Date(user.registrationDate).getFullYear()}</li>
-              <li>tasks given out: 14</li>
-            </ul>
+              <ul>
+                <li>{user.username}</li>
+                <li>{getAge(user.dob)}</li>
+                <li>{user.gender}</li>
+                <li>
+                  member since {new Date(user.registrationDate).getFullYear()}
+                </li>
+                <li>tasks given out: 14</li>
+              </ul>
             </div>
           </div>
           <div className="myprofile-user-intro">
-          <div className="myprofile-user-intro-title">ABOUT ME</div>
-            <div className="myprofile-user-intro-text">{user.shortIntroduction}</div>
+            <div className="myprofile-user-intro-title">ABOUT ME</div>
+            <div className="myprofile-user-intro-text">
+              {user.shortIntroduction}
+            </div>
           </div>
         </div>
         <div className="myprofile-reservation-container">
-          <div className="myprofile-reservation-container-title">Your upcoming tasks 📅</div>
+          <div className="myprofile-reservation-container-title">
+            Your upcoming tasks 📅
+          </div>
           <ReservationCard />
           <ReservationCard />
           <ReservationCard />
           <ReservationCard />
           <ReservationCard />
-
         </div>
       </div>
     </div>

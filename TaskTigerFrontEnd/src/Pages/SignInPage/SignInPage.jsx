@@ -15,25 +15,26 @@ export default function SignInPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-      const res = await fetch(`/api/auth/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: username,
-          password: password,
-        }),
-      });
+    const res = await fetch(`/api/auth/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: username,
+        password: password,
+      }),
+    });
 
-      try {
-        const userData = await res.json();
-        localStorage.setItem("user", JSON.stringify(userData));
-        navigate("/myprofile")
-      } catch (error) {
-        setErrorMessage("Invalid username or password.");
-      }
+    try {
+      const token = await res.text();
+      localStorage.setItem("token", token);
+      navigate("/myprofile");
+    } catch (error) {
+      console.log(error);
+      setErrorMessage("Invalid username or password.");
     }
+  };
 
   return (
     <div className="sign-in-page">
@@ -65,13 +66,8 @@ export default function SignInPage() {
         <div className="error-message">{errorMessage}</div>
 
         <div className="register" onClick={() => navigate("/")}>
-            Don't have an account?{" "}
-            <b>
-              Register here
-            </b>
-            .
-          </div>
-
+          Don't have an account? <b>Register here</b>.
+        </div>
       </div>
     </div>
   );

@@ -11,8 +11,8 @@ import ThankYouPage from "./Pages/ThankYou/thankYouPage";
 
 function App() {
   useEffect(() => {
-    if (!JSON.parse(window.localStorage.getItem("user")))
-      window.localStorage.setItem("user", null);
+    if (!window.localStorage.getItem("token"))
+      window.localStorage.setItem("token", null);
   }, []);
 
   return (
@@ -25,8 +25,7 @@ function App() {
             <Route path="/taskers" element={<TaskersPage />} />
             <Route path="/signin" element={<SignInPage />} />
             <Route path="/confirmation" element={<ConfirmationPage />} />
-            <Route path="/thankyou" element={<ThankYouPage/>} />
-            
+            <Route path="/thankyou" element={<ThankYouPage />} />
           </Route>
         </Routes>
       </Router>
