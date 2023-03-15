@@ -2,6 +2,8 @@ import React, {useEffect, useState} from "react";
 import "./TaskersPage.css";
 import HandymanHorizontalCard from "../../Components/HandymanCard/HandymanHorizontalCard";
 import {useNavigate} from "react-router-dom";
+import Calendar from "../../Components/Calendar/Calendar.jsx";
+
 
 export default function TaskersPage() {
     const [filterCountry, setFilterCountry] = useState("");
@@ -13,10 +15,23 @@ export default function TaskersPage() {
     const [filterWage, setFilterWage] = useState(0);
     const [taskers, setTaskers] = useState(null);
 
+    const [oneTaskerTimeSlots, setOneTaskerTimeSlots] = useState(null);
+
     const [users, setUsers] = useState(null);
     const currentClient = useState(JSON.parse(localStorage.getItem("user")));
 
     const navigate = useNavigate()
+
+    useEffect(() => {
+        async function fetchData() {
+            const response = await fetch("/api/timeSlots/1");
+            const data = await response.json();
+            setOneTaskerTimeSlots([data]);
+        }
+
+        fetchData();
+    }, []);
+
 
     useEffect(() => {
         async function fetchData() {
@@ -60,62 +75,77 @@ export default function TaskersPage() {
         }
     };
 
-    return (
+    const events =
+        [{
+            id: 1,
+            text: "true",
+            start: "2023-03-07T10:30:00",
+            end: "2023-03-07T13:00:00"
+        }];
+
+    return oneTaskerTimeSlots ? (
         <div className="taskers-page">
             <div className="taskers-page-sidebar">
                 <div className="taskers-page-sidebar-calendar">
                     <div className="taskers-page-sidebar-calendar-title">
-                        Available people:
+                        Timetable:
                     </div>
-                    <div className="taskers-page-sidebar-calendar-calendar">
-                        <div className="hour">6 - 7</div>
-                        <div className="day">5</div>
-                        <div className="day">5</div>
-                        <div className="day">5</div>
-                        <div className="day">5</div>
-                        <div className="day">5</div>
-                        <div className="day">5</div>
-                        <div className="day">5</div>
-                        <div className="hour">7 - 8</div>
-                        <div className="day">5</div>
-                        <div className="day">5</div>
-                        <div className="day">5</div>
-                        <div className="day">5</div>
-                        <div className="day">5</div>
-                        <div className="day">5</div>
-                        <div className="day">5</div>
-                        <div className="hour">8 - 9</div>
-                        <div className="day">5</div>
-                        <div className="day">5</div>
-                        <div className="day">5</div>
-                        <div className="day">5</div>
-                        <div className="day">5</div>
-                        <div className="day">5</div>
-                        <div className="day">5</div>
-                        <div className="hour">9 - 10</div>
-                        <div className="day">5</div>
-                        <div className="day">5</div>
-                        <div className="day">5</div>
-                        <div className="day">5</div>
-                        <div className="day">5</div>
-                        <div className="day">5</div>
-                        <div className="day">5</div>
-                        <div className="hour">10 - 11</div>
-                        <div className="day">5</div>
-                        <div className="day">5</div>
-                        <div className="day">5</div>
-                        <div className="day">5</div>
-                        <div className="day">5</div>
-                        <div className="day">5</div>
-                        <div className="day">5</div>
-                        <div className="hour">11 - 12</div>
-                        <div className="day">5</div>
-                        <div className="day">5</div>
-                        <div className="day">5</div>
-                        <div className="day">5</div>
-                        <div className="day">5</div>
-                        <div className="day">5</div>
-                        <div className="day">5</div>
+                    {/*<div className="taskers-page-sidebar-calendar-calendar">*/}
+                    {/*    <div className="hour">6 - 7</div>*/}
+                    {/*    <div className="day">5</div>*/}
+                    {/*    <div className="day">5</div>*/}
+                    {/*    <div className="day">5</div>*/}
+                    {/*    <div className="day">5</div>*/}
+                    {/*    <div className="day">5</div>*/}
+                    {/*    <div className="day">5</div>*/}
+                    {/*    <div className="day">5</div>*/}
+                    {/*    <div className="hour">7 - 8</div>*/}
+                    {/*    <div className="day">5</div>*/}
+                    {/*    <div className="day">5</div>*/}
+                    {/*    <div className="day">5</div>*/}
+                    {/*    <div className="day">5</div>*/}
+                    {/*    <div className="day">5</div>*/}
+                    {/*    <div className="day">5</div>*/}
+                    {/*    <div className="day">5</div>*/}
+                    {/*    <div className="hour">8 - 9</div>*/}
+                    {/*    <div className="day">5</div>*/}
+                    {/*    <div className="day">5</div>*/}
+                    {/*    <div className="day">5</div>*/}
+                    {/*    <div className="day">5</div>*/}
+                    {/*    <div className="day">5</div>*/}
+                    {/*    <div className="day">5</div>*/}
+                    {/*    <div className="day">5</div>*/}
+                    {/*    <div className="hour">9 - 10</div>*/}
+                    {/*    <div className="day">5</div>*/}
+                    {/*    <div className="day">5</div>*/}
+                    {/*    <div className="day">5</div>*/}
+                    {/*    <div className="day">5</div>*/}
+                    {/*    <div className="day">5</div>*/}
+                    {/*    <div className="day">5</div>*/}
+                    {/*    <div className="day">5</div>*/}
+                    {/*    <div className="hour">10 - 11</div>*/}
+                    {/*    <div className="day">5</div>*/}
+                    {/*    <div className="day">5</div>*/}
+                    {/*    <div className="day">5</div>*/}
+                    {/*    <div className="day">5</div>*/}
+                    {/*    <div className="day">5</div>*/}
+                    {/*    <div className="day">5</div>*/}
+                    {/*    <div className="day">5</div>*/}
+                    {/*    <div className="hour">11 - 12</div>*/}
+                    {/*    <div className="day">5</div>*/}
+                    {/*    <div className="day">5</div>*/}
+                    {/*    <div className="day">5</div>*/}
+                    {/*    <div className="day">5</div>*/}
+                    {/*    <div className="day">5</div>*/}
+                    {/*    <div className="day">5</div>*/}
+                    {/*    <div className="day">5</div>*/}
+                    {/*</div>*/}
+                    <div>
+                        <Calendar
+                            props={oneTaskerTimeSlots}
+                            time={events}
+                        >
+                        </Calendar>
                     </div>
                 </div>
             </div>
@@ -244,5 +274,5 @@ export default function TaskersPage() {
                 </div>
             </div>
         </div>
-    );
+    ) : "";
 }
