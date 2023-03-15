@@ -1,10 +1,11 @@
 import React from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Title from "../Title";
 import "./NavBar.css";
 
 export default function NavBar() {
   const navigate = useNavigate();
+  
   const isLoggedIn =
     localStorage.getItem("token") !== null &&
     localStorage.getItem("token") !== "null";
@@ -13,7 +14,7 @@ export default function NavBar() {
     localStorage.setItem("token", null);
     navigate("/");
   };
-  console.log(window.location.href);
+
   return (
     <>
       <nav className="navbar">
@@ -33,7 +34,7 @@ export default function NavBar() {
           >
             Sign out
           </div>
-        ) : window.location.href === "http://localhost:5173/signin" ? (
+        ) : location.pathname === "/signin" ? (
           <div className="nav-button" onClick={() => navigate("/")}>
             Register
           </div>
