@@ -5,13 +5,33 @@ import ReservationCard from "../../Components/ReservationCard/ReservationCard";
 import { useNavigate } from "react-router-dom";
 
 export default function MyProfile() {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+  const [user, setUser] = useState(null);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    JSON.parse(window.localStorage.getItem("user")) === null ?
+    window.localStorage.getItem("token") === null ?
     navigate("/") : null;
+
+    async function fetchData() {
+    const res = await fetch(`/api/users/authenticate`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem("token")}`
+      },
+    });
+
+    try {
+      const user = await res.json();
+      console.log(user)
+      setUser(user)
+    } catch(error) {
+      console.log(error)
+    }
+  }
+
+  fetchData()
   }, [])
 
   const getAge = (birthDate) => {
@@ -23,7 +43,7 @@ export default function MyProfile() {
   }
 
 
-  return (
+  return user ? (
     <div className="myprofile-page">
       <div className="myprofile-name">{user.firstName + " " + user.lastName}</div>
       <div className="myprofile-details">
@@ -33,13 +53,15 @@ export default function MyProfile() {
           </div>
           <div className="myprofile-user-info">
             <div className="myprofile-user-info-title">{user.isTasker ? "TASKER" : "CLIENT" }</div>
+            <div className="myprofile-user-info-text">
             <ul>
               <li>{user.username}</li>
               <li>{getAge(user.dob)}</li>
-              <li>{user.gender.toLowerCase()}</li>
+              <li>{user.gender}</li>
               <li>member since {new Date(user.registrationDate).getFullYear()}</li>
               <li>tasks given out: 14</li>
             </ul>
+            </div>
           </div>
           <div className="myprofile-user-intro">
           <div className="myprofile-user-intro-title">ABOUT ME</div>
@@ -57,5 +79,5 @@ export default function MyProfile() {
         </div>
       </div>
     </div>
-  );
+  ) : null;
 }

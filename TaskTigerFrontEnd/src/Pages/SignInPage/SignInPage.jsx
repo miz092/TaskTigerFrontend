@@ -15,13 +15,13 @@ export default function SignInPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-      const res = await fetch(`/api/users/login`, {
+      const res = await fetch(`/api/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          userName: username,
+          username: username,
           password: password,
         }),
       });

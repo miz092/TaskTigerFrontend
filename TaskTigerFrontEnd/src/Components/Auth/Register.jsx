@@ -27,7 +27,7 @@ export default function Register() {
         e.preventDefault();
 
         if (password === passwordAgain) {
-            const res = await fetch(`/api/users/register`, {
+            const res = await fetch(`/api/auth/register`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -46,13 +46,13 @@ export default function Register() {
             });
 
             try {
-                const user_id = await res.json();
-                const userData = await (await fetch("/api/users/" + user_id)).json();
-                window.localStorage.setItem("user", JSON.stringify(userData));
-                //setSignedInUser(userData);
-                //navigate("/user/" + user_id);
+                const token = await res.text();
+                //const userData = await (await fetch("/api/users/" + user_id)).json();
+                //console.log(token)
+                window.localStorage.setItem("token", token);
                 navigate("/myprofile")
             } catch (error) {
+                console.log(error)
                 setErrorMessage("Failed to register. Maybe username already exists?");
             }
         } else {
