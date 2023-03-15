@@ -9,7 +9,6 @@ export default function NavBar() {
     localStorage.getItem("token") !== null &&
     localStorage.getItem("token") !== "null";
 
-  console.log(isLoggedIn);
   const signOut = () => {
     localStorage.setItem("token", null);
     navigate("/");
