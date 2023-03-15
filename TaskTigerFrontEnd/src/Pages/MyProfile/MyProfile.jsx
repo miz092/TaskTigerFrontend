@@ -19,7 +19,7 @@ export default function MyProfile() {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Authorization": `Bearer ${localStorage.getItem("token")}`,
         },
       });
 
@@ -55,7 +55,7 @@ export default function MyProfile() {
           </div>
           <div className="myprofile-user-info">
             <div className="myprofile-user-info-title">
-              {user.isTasker ? "TASKER" : "CLIENT"}
+              {user.tasker ? "TASKER" : "CLIENT"}
             </div>
             <div className="myprofile-user-info-text">
               <ul>
