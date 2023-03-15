@@ -1,13 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./ConfirmationPage.css";
+import { useLocation } from "react-router-dom";
 import ConfirmationCard from "../../Components/ConfirmationCard/ConfirmationCard.jsx";
 
 export default function ConfirmationPage() {
-    return (
-        <div>
-            <div>
-                <ConfirmationCard/>
-            </div>
-        </div>
-    );
+  const location = useLocation();
+
+  const dataRecieved = location.state?.data;
+
+  return <ConfirmationCard details={dataRecieved} />;
 }
