@@ -94,8 +94,8 @@ export default function ConfirmationCard({ details }) {
       <div className="confirmation-card-details">
         <div className="confirmation-details-line">
           <div className="confirmation-details-nameTag">Client:</div>
-          <div className="confirmation-details-parameter">
-            {user?.firstName + " " + user?.lastName}
+          <div className="confirmation-details-parameter" style={{fontSize:"1.25rem"}}>
+            <b>{user?.firstName + " " + user?.lastName}</b>
           </div>
         </div>
         <div className="confirmation-details-line">
@@ -159,16 +159,16 @@ export default function ConfirmationCard({ details }) {
           <hr id="hr" />
           <div className="confirmation-details-line-price">
             <div className="confirmation-details-line-price">
-              <div>2</div>
-              <div>x</div>
+              {/* <div>2</div>
+              <div>x</div> */}
               <div> ${details?.tasker.taskerInfo.hourlyWage}</div>
             </div>
-            <div className>$61.97</div>
+            <div className>${details?.tasker.taskerInfo.hourlyWage}</div>
           </div>
           <div className="confirmation-details-line-total">
             <div className="confirmation-details-nameTag">Total (USD):</div>
             <div className="confirmation-details-line-total-priceValue">
-              $61.97
+            ${details?.tasker.taskerInfo.hourlyWage}
             </div>
           </div>
         </div>

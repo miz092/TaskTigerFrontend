@@ -15,6 +15,7 @@ function App() {
   useEffect(() => {
     if (!window.localStorage.getItem("token"))
       window.localStorage.setItem("token", null);
+      
   }, []);
 
   return (

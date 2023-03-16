@@ -27,11 +27,22 @@ export default function ReservationCard({ userReservations }) {
                   />
                 </div>
                 <div className="reservation-card-info-details">
-                  <div className="reservation-card-status">
+                  <div className="reservation-card-status" style={{
+            color:
+              reservation?.reservationStatus === "PENDING"
+                ? "darkorange"
+                : reservation?.reservationStatus === "CONFIRMED"
+                ? "darkblue"
+                : reservation?.reservationStatus === "COMPLETED"
+                ? "darkgreen"
+                : reservation?.reservationStatus === "CANCELLED"
+                ? "darkred"
+                : "black",
+          }}>
                     {reservation.reservationStatus}
                   </div>
                   <div className="reservation-card-task">
-                    {reservation.workType}
+                    {reservation.workType.replaceAll("_", " ")}
                   </div>
 
                   <div className="reservation-card-id">

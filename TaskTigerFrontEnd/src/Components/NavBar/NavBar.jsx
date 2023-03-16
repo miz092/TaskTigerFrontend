@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Title from "../Title";
 import "./NavBar.css";
@@ -14,6 +14,7 @@ export default function NavBar() {
     localStorage.setItem("token", null);
     navigate("/");
   };
+
 
   return (
     <>
@@ -43,6 +44,13 @@ export default function NavBar() {
             Sign in
           </div>
         )}
+
+        <div class="slider-switch">
+          <label class="switch" htmlFor="nightmode-checkbox">
+            <input type="checkbox" id="nightmode-checkbox" />
+            <div class="slider round"></div>
+          </label>
+        </div>
       </nav>
       <Outlet />
     </>
