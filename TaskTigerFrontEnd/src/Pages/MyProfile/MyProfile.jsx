@@ -27,7 +27,7 @@ export default function MyProfile() {
         const user = await res.json();
 
         setUser(user);
-        user.role.name === "ADMIN" ? navigate("/adminpage") : null;
+        user.role.name === "ROLE_ADMIN" ? navigate("/adminpage") : null;
       } catch (error) {
         console.log(error);
       }

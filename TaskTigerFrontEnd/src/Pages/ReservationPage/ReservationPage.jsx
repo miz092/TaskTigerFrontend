@@ -113,7 +113,7 @@ function ReservationPage() {
           <b>Status:</b> {reservation?.reservationStatus}
         </div>
         <div className="reservation-detail">
-          <b>Type of work:</b> {reservation?.workType}
+          <b>Type of work:</b> {reservation?.workType.replaceAll("_", " ")}
         </div>
         <div className="reservation-detail">
           <b>Description:</b> {reservation?.description}
@@ -121,8 +121,8 @@ function ReservationPage() {
 
         <hr />
 
-        <table>
-          <tbody className="reservationPage_container_reservationDetails_table">
+        <table className="reservationPage_container_reservationDetails_table">
+          <tbody>
             <tr>
               <td style={{ fontWeight: "bold", textAlign: "left" }}>
                 First Name:
@@ -161,7 +161,7 @@ function ReservationPage() {
                   <td style={{ fontWeight: "bold", textAlign: "left" }}>
                     Hourly Wage:
                   </td>
-                  <td>{otherUser.taskerInfo.hourlyWage}</td>
+                  <td>{otherUser.taskerInfo.hourlyWage} $</td>
                 </tr>
                 <tr>
                   <td style={{ fontWeight: "bold", textAlign: "left" }}>

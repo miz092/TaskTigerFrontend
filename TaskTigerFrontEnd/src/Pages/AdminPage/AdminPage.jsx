@@ -37,16 +37,23 @@ function AdminPage() {
 
     fetchData();
   }, []);
+
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch("/api/users/all");
+      const response = await fetch("/api/users/all", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       const data = await response.json();
       setUsers(data);
     }
 
     fetchData();
   }, [deleted]);
-
+console.log(user)
   const getAge = (birthDate) => {
     const thisDate = new Date();
     const dob = new Date(birthDate);
@@ -54,7 +61,7 @@ function AdminPage() {
     const dobYear = dob.getFullYear();
     return thisDate > dob ? thisYear - dobYear - 1 : thisYear - dobYear;
   };
-
+  console.log(users);
   return user ? (
     <div className="adminPage-page">
       <div className="adminPage-name">

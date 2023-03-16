@@ -30,7 +30,7 @@ export default function SignInPage() {
       const token = await res.text();
       localStorage.setItem("token", token);
       navigate("/myprofile");
-      // user.isAdmin ? navigate("/adminpage") :
+      user.isAdmin ? navigate("/adminpage") : null;
     } catch (error) {
       console.log(error);
       setErrorMessage("Invalid username or password.");

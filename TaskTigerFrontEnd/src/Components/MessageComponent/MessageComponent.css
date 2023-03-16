@@ -130,9 +130,11 @@ h2 {
 .message-message {
   width: 80%;
   height: 100%;
+  max-height: 50px;
   resize: none;
   border: 1px solid black;
   padding: 0.25rem;
+  align-self: flex-end;
 }
 
 .message-message:focus {
@@ -146,6 +148,7 @@ h2 {
   cursor: pointer;
   transition: 250ms;
   padding-left: 1rem;
+  align-self: flex-end;
 }
 
 .message-send:hover {
