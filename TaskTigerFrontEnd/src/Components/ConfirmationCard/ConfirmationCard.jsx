@@ -10,6 +10,7 @@ export default function ConfirmationCard({ details }) {
   const [description, setDescription] = useState("");
   const [message, setMessage] = useState("");
   const [selectedJob, setSelectedJob] = useState(details?.jobs[0]);
+  const [id, setId] = useState(null);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
@@ -78,8 +79,13 @@ export default function ConfirmationCard({ details }) {
         message: message,
       }),
     });
+    try {
+      const data = await res.json();
 
-    // navigate("/thankyou");
+      navigate(`/reservation/${data}`);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

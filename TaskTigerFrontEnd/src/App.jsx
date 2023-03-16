@@ -5,6 +5,7 @@ import NavBar from "./Components/NavBar/NavBar";
 import ConfirmationPage from "./Pages/ConfirmationPage/ConfirmationPage";
 import HomePage from "./Pages/HomePage/HomePage";
 import MyProfile from "./Pages/MyProfile/MyProfile";
+import ReservationPage from "./Pages/ReservationPage/ReservationPage";
 import SignInPage from "./Pages/SignInPage/SignInPage";
 import TaskersPage from "./Pages/TaskersPage/TaskersPage";
 import ThankYouPage from "./Pages/ThankYou/thankYouPage";
@@ -26,6 +27,7 @@ function App() {
             <Route path="/signin" element={<SignInPage />} />
             <Route path="/confirmation" element={<ConfirmationPage />} />
             <Route path="/thankyou" element={<ThankYouPage />} />
+            <Route path="/reservation/:id" element={<ReservationPage />} />
           </Route>
         </Routes>
       </Router>
