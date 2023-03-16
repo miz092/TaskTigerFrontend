@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import MessageComponent from "../../Components/MessageComponent/MessageComponent";
+import "./ReservationPage.css";
 function ReservationPage() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -9,6 +10,8 @@ function ReservationPage() {
   const [user, setUser] = useState(null);
   const [tasker, setTasker] = useState(null);
   const [client, setClient] = useState(null);
+  const [otherUserId, setOtherUserId] = useState(0);
+  const [otherUser, setOtherUser] = useState(null);
 
   const isLoggedIn =
     localStorage.getItem("token") !== null &&
@@ -16,7 +19,6 @@ function ReservationPage() {
 
   useEffect(() => {
     !isLoggedIn ? navigate("/") : null;
-
     async function fetchData() {
       const res = await fetch(`/api/users/authenticate`, {
         method: "GET",
@@ -48,88 +50,141 @@ function ReservationPage() {
         setReservation(data);
         setTasker(data.taskerId);
         setClient(data.clientId);
+        setOtherUserId(
+          user?.id === data.taskerId ? data.clientId : data.taskerId
+        );
       } catch (error) {
         console.log(error);
       }
     }
+
+    async function fetchOtherUser() {
+      const res = await fetch(`/api/users/${otherUserId}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+
+      try {
+        const data = await res.json();
+        setOtherUser(data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
     fetchData();
     fetchReservation();
-    console.log(client + " " + tasker);
-  }, [id]);
-
-  // function getCurrentAndOtherUserIds() {
-  //   if (!user || !reservation) {
-  //     return { currentUserId: null, otherUserId: null };
-  //   }
-
-  //   const isTasker = user?.id === reservation?.tasker;
-  //   const currentUserId = isTasker ? reservation.tasker : reservation.client;
-  //   const otherUserId = isTasker ? reservation.client : reservation.tasker;
-
-  //   return { currentUserId, otherUserId };
-  // }
+    fetchOtherUser();
+  }, [id, otherUserId]);
 
   function isCurrentUserTasker() {
-    return user?.id === tasker;
+    return user?.tasker;
   }
+  console.log(reservation);
 
-  //const { currentUserId, otherUserId } = getCurrentAndOtherUserIds();
-  return user && reservation ? (
+  return reservation && otherUser ? (
     <div className="reservationPage_container">
       <div className="reservationPage_container_reservationDetails">
-        Address: <p>{reservation?.address}</p>
-        Status: <p>{reservation?.reservationStatus}</p>
-        Type of work: <p>{reservation?.workType}</p>
-        {/* <table>
-          <tbody>
+        <h2>Details:</h2>
+
+        <hr />
+
+        <div className="reservation-detail">
+          <b>Address:</b> {reservation?.address}
+        </div>
+        <div
+          className="reservation-detail"
+          style={{
+            color:
+              reservation?.reservationStatus === "PENDING"
+                ? "darkorange"
+                : reservation?.reservationStatus === "CONFIRMED"
+                ? "darkblue"
+                : reservation?.reservationStatus === "COMPLETED"
+                ? "darkgreen"
+                : reservation?.reservationStatus === "CANCELLED"
+                ? "darkred"
+                : "black",
+          }}
+        >
+          <b>Status:</b> {reservation?.reservationStatus}
+        </div>
+        <div className="reservation-detail">
+          <b>Type of work:</b> {reservation?.workType}
+        </div>
+        <div className="reservation-detail">
+          <b>Description:</b> {reservation?.description}
+        </div>
+
+        <hr />
+
+        <table>
+          <tbody className="reservationPage_container_reservationDetails_table">
             <tr>
-              <td>First Name</td>
-              <td>{user.firstName}</td>
-            </tr>
-            <tr>
-              <td>Last Name</td>
-              <td>{user.lastName}</td>
-            </tr>
-            <tr>
-              <td>Email</td>
-              <td>{user.email}</td>
-            </tr>
-            <tr>
-              <td>Phone Number</td>
-              <td>{user.phoneNumber}</td>
-            </tr>
-            <tr>
-              <td>Gender</td>
-              <td>{user.gender}</td>
-            </tr>
-            <tr>
-              <td>Date of Birth</td>
-              <td>{user.dob}</td>
-            </tr>
-            <tr>
-              <td>Hourly Wage</td>
-              <td>{user.taskerInfo.hourlyWage}</td>
-            </tr>
-            <tr>
-              <td>Skills</td>
-              <td>
-                <ul>
-                  {user.taskerInfo.skills.map((skill, index) => (
-                    <li key={index}>{skill}</li>
-                  ))}
-                </ul>
+              <td style={{ fontWeight: "bold", textAlign: "left" }}>
+                First Name:
               </td>
+              <td>{otherUser.firstName}</td>
             </tr>
+            <tr>
+              <td style={{ fontWeight: "bold", textAlign: "left" }}>
+                Last Name:
+              </td>
+              <td>{otherUser.lastName}</td>
+            </tr>
+            <tr>
+              <td style={{ fontWeight: "bold", textAlign: "left" }}>Email:</td>
+              <td>{otherUser.email}</td>
+            </tr>
+            <tr>
+              <td style={{ fontWeight: "bold", textAlign: "left" }}>
+                Phone Number:
+              </td>
+              <td>{otherUser.phoneNumber}</td>
+            </tr>
+            <tr>
+              <td style={{ fontWeight: "bold", textAlign: "left" }}>Gender:</td>
+              <td>{otherUser.gender}</td>
+            </tr>
+            <tr>
+              <td style={{ fontWeight: "bold", textAlign: "left" }}>
+                Date of Birth:
+              </td>
+              <td>{otherUser.dob}</td>
+            </tr>
+            {isCurrentUserTasker() ? (
+              <>
+                <tr>
+                  <td style={{ fontWeight: "bold", textAlign: "left" }}>
+                    Hourly Wage:
+                  </td>
+                  <td>{otherUser.taskerInfo.hourlyWage}</td>
+                </tr>
+                <tr>
+                  <td style={{ fontWeight: "bold", textAlign: "left" }}>
+                    Skills:
+                  </td>
+                  <td>
+                    <ul>
+                      {otherUser.taskerInfo.skills.map((skill, index) => (
+                        <li key={index}>{skill.replaceAll("_", " ")}</li>
+                      ))}
+                    </ul>
+                  </td>
+                </tr>
+              </>
+            ) : null}
           </tbody>
-        </table> */}
+        </table>
       </div>
-      <div>
-        <MessageComponent
-          reservationId={id}
-          currentUserId={isCurrentUserTasker() ? tasker : client}
-          otherUserId={isCurrentUserTasker() ? client : tasker}
-        />
-      </div>
+      <MessageComponent
+        reservationId={id}
+        currentUserId={user?.id}
+        otherUserId={otherUserId}
+      />
     </div>
   ) : (
     <></>

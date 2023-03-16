@@ -110,7 +110,7 @@ export default function ConfirmationCard({ details }) {
               {details?.jobs.map((job, index) => {
                 return (
                   <option key={job + index} value={job}>
-                    {job}
+                    {job.replaceAll("_", " ")}
                   </option>
                 );
               })}

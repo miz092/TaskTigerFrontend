@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
+import "./MessageComponent.css"
 
 const MessageComponent = ({ reservationId, currentUserId, otherUserId }) => {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
   const [reservation, setReservation] = useState(null);
   useEffect(() => {
-    console.log(reservationId + " " + currentUserId + " " + otherUserId);
 
     async function fetchMessages() {
       try {
@@ -21,7 +21,6 @@ const MessageComponent = ({ reservationId, currentUserId, otherUserId }) => {
         );
         const data = await response.json();
         setMessages(data);
-        console.log(messages);
       } catch (error) {
         console.log(error);
       }
@@ -29,7 +28,7 @@ const MessageComponent = ({ reservationId, currentUserId, otherUserId }) => {
     fetchMessages();
   }, [reservationId]);
 
-  const sendMessage = async (e, reservationId) => {
+  const sendMessage = async (e) => {
     e.preventDefault();
 
     const response = await fetch(`/api/reservation/message/${reservationId}`, {
@@ -62,34 +61,37 @@ const MessageComponent = ({ reservationId, currentUserId, otherUserId }) => {
       console.log(error);
     }
   };
-
   return (
-    <div>
-      <h2>Messages</h2>
-      <ul>
+    <div className="reservationPage_container_messages">
+      <h2>Messages:</h2>
+      <ul className="messages">
         {messages.map((msg, index) => (
           <li
             key={index}
-            style={{
-              textAlign: msg.sender === currentUserId ? "right" : "left",
-            }}
+            className={msg.senderId === currentUserId || msg.sender?.id === currentUserId ? "message-message-from-me" : "message-message-to-me"}
           >
             {msg.message}
           </li>
         ))}
       </ul>
+      <div className="message-sender">
       <textarea
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         placeholder="Type your message here"
+        className="message-message"
+        maxLength={250}
+        onKeyPress={(e) => e.key === "Enter" ? sendMessage(e) : null}
       />
       <button
         onClick={(e) => {
-          sendMessage(e, reservationId);
+          sendMessage(e);
         }}
+        className={"message-send"}
       >
-        Send
+        ▶
       </button>
+      </div>
     </div>
   );
 };

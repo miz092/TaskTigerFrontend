@@ -12,9 +12,8 @@ export default function TaskersPage() {
   const [filterSkills, setFilterSkills] = useState([]);
   const [filterWage, setFilterWage] = useState(0);
   const [taskers, setTaskers] = useState(null);
-
+  const [skills, setSkills] = useState([]);
   const [users, setUsers] = useState(null);
-  const currentClient = useState(JSON.parse(localStorage.getItem("user")));
 
   const navigate = useNavigate();
 
@@ -24,8 +23,14 @@ export default function TaskersPage() {
       const data = await response.json();
       setUsers(data);
     }
+    async function fetchSkills() {
+      const res = await fetch("/api/users/skills");
+      const data = await res.json();
+      setSkills(data);
+    }
 
     fetchData();
+    fetchSkills();
   }, []);
 
   const handleCheckbox = (e) => {
@@ -120,48 +125,25 @@ export default function TaskersPage() {
               <div className="taskers-page-main-filter-skills-text">
                 by Skills:{" "}
               </div>
-              <div className="skill-div">
+              {skills ? skills.map((skill) => {
+                return (
+                <div className="skill-div" key={skill}>
                 <input
                   name="skill-1"
-                  value={"CLEANING"}
+                  value={skill}
                   type={"checkbox"}
-                  id={"skill-1"}
+                  id={skill}
                   className={"skills-checkbox"}
-                  checked={filterSkills.includes("CLEANING")}
+                  checked={filterSkills.includes(skill)}
                   onChange={(e) => handleCheckbox(e)}
                 ></input>
-                <label htmlFor="skill-1" id="skill-1-label">
-                  CLEANING
+                <label htmlFor={skill} id={skill + "-label"}>
+                  {skill.replaceAll("_", " ")}
                 </label>
               </div>
-              <div className="skill-div">
-                <input
-                  name="skill-2"
-                  value={"GARDENING"}
-                  type={"checkbox"}
-                  id={"skill-2"}
-                  className={"skills-checkbox"}
-                  checked={filterSkills.includes("GARDENING")}
-                  onChange={(e) => handleCheckbox(e)}
-                ></input>
-                <label htmlFor="skill-2" id="skill-2-label">
-                  GARDENING
-                </label>
-              </div>
-              <div className="skill-div">
-                <input
-                  name="skill-3"
-                  value={"DOG_WALKING"}
-                  type={"checkbox"}
-                  id={"skill-3"}
-                  className={"skills-checkbox"}
-                  checked={filterSkills.includes("DOG_WALKING")}
-                  onChange={(e) => handleCheckbox(e)}
-                ></input>
-                <label htmlFor="skill-3" id="skill-3-label">
-                  DOG WALKING
-                </label>
-              </div>
+                )
+              }) : null}
+
             </div>
             <div className="taskers-page-main-filter-wage">
               <div className="taskers-page-main-filter-wage-text">
@@ -191,7 +173,7 @@ export default function TaskersPage() {
                   <div
                     key={i}
                     onClick={() =>
-                      getTaskerAndClientInfo(tasker, currentClient)
+                      getTaskerAndClientInfo(tasker)
                     }
                     className={"taskers-page-main-list-card"}
                   >
