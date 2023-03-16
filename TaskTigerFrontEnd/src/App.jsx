@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import NavBar from "./Components/NavBar/NavBar";
+import AdminPage from "./Pages/AdminPage/AdminPage";
 import ConfirmationPage from "./Pages/ConfirmationPage/ConfirmationPage";
 import HomePage from "./Pages/HomePage/HomePage";
 import MyProfile from "./Pages/MyProfile/MyProfile";
@@ -28,6 +29,7 @@ function App() {
             <Route path="/confirmation" element={<ConfirmationPage />} />
             <Route path="/thankyou" element={<ThankYouPage />} />
             <Route path="/reservation/:id" element={<ReservationPage />} />
+            <Route path="/adminpage" element={<AdminPage />} />
           </Route>
         </Routes>
       </Router>
