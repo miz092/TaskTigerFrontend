@@ -11,40 +11,52 @@ h2 {
 }
 
 .reservationPage_container_reservationDetails {
-flex: 0.5;
-display: flex;
-flex-direction: column;
-background-color: bisque;
-border-radius: 1rem;
-padding: 2rem 2rem 1rem 2rem;
-align-items:baseline;
-color: black;
-gap: 1rem;
+  flex: 0.5;
+  display: flex;
+  flex-direction: column;
+  background-color: bisque;
+  border-radius: 1rem;
+  padding: 2rem 2rem 1rem 2rem;
+  align-items: baseline;
+  color: black;
+  gap: 1rem;
 }
 
 .reservationPage_container_reservationDetails_table {
-width: 100%;
-height: 100%;
-text-align: right;
-font-size: 1.2rem;
+  width: 100%;
+  height: 100%;
+  text-align: right;
+  font-size: 1.2rem;
 }
 
 .reservationPage_container_reservationDetails_table td {
-padding: 0.25rem;
-border-bottom: 1px solid black;
+  padding: 0.25rem;
+  border-bottom: 1px solid black;
 }
 
 .reservationPage_container_reservationDetails_table li {
   list-style-type: "- ";
-  }
-  
+}
+
 .reservation-detail {
   font-size: 1.25rem;
 }
+.reservation-detail-confirm {
+  background-color: green;
+  color: white;
+  width: 250px;
 
-hr {
-width: 100%;
-height: 2px;
-background-color: black;
+  border-radius: 5px;
+}
+.reservation-detail-cancel {
+  background-color: red;
+  color: white;
+  width: 250px;
+  border-radius: 5px;
 }
 
+hr {
+  width: 100%;
+  height: 2px;
+  background-color: black;
+}
