@@ -14,7 +14,7 @@ export default function TaskersPage() {
   const [taskers, setTaskers] = useState(null);
   const [skills, setSkills] = useState([]);
   const [users, setUsers] = useState(null);
-
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -72,6 +72,27 @@ export default function TaskersPage() {
     }
   };
 
+  useEffect(() => {
+    async function fetchData() {
+      const res = await fetch(`/api/users/authenticate`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+
+      try {
+        const user = await res.json();
+
+        setUser(user);
+        user.role.name === "ROLE_ADMIN" ? navigate("/adminpage") : null;
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
+  }, []);
   return (
     <div className="taskers-page">
       <div className="taskers-page-sidebar">
@@ -125,25 +146,26 @@ export default function TaskersPage() {
               <div className="taskers-page-main-filter-skills-text">
                 by Skills:{" "}
               </div>
-              {skills ? skills.map((skill) => {
-                return (
-                <div className="skill-div" key={skill}>
-                <input
-                  name="skill-1"
-                  value={skill}
-                  type={"checkbox"}
-                  id={skill}
-                  className={"skills-checkbox"}
-                  checked={filterSkills.includes(skill)}
-                  onChange={(e) => handleCheckbox(e)}
-                ></input>
-                <label htmlFor={skill} id={skill + "-label"}>
-                  {skill.replaceAll("_", " ")}
-                </label>
-              </div>
-                )
-              }) : null}
-
+              {skills
+                ? skills.map((skill) => {
+                    return (
+                      <div className="skill-div" key={skill}>
+                        <input
+                          name="skill-1"
+                          value={skill}
+                          type={"checkbox"}
+                          id={skill}
+                          className={"skills-checkbox"}
+                          checked={filterSkills.includes(skill)}
+                          onChange={(e) => handleCheckbox(e)}
+                        ></input>
+                        <label htmlFor={skill} id={skill + "-label"}>
+                          {skill.replaceAll("_", " ")}
+                        </label>
+                      </div>
+                    );
+                  })
+                : null}
             </div>
             <div className="taskers-page-main-filter-wage">
               <div className="taskers-page-main-filter-wage-text">
@@ -168,24 +190,24 @@ export default function TaskersPage() {
         </form>
         <div className="taskers-page-main-list">
           {taskers
-            ? taskers.map((tasker, i) => {
-                return (
-                  <div
-                    key={i}
-                    onClick={() =>
-                      getTaskerAndClientInfo(tasker)
-                    }
-                    className={"taskers-page-main-list-card"}
-                  >
-                    <HandymanHorizontalCard
-                      firstName={tasker.firstName}
-                      lastName={tasker.lastName}
-                      skills={tasker?.taskerInfo?.skills}
-                      hourlyWage={tasker?.taskerInfo?.hourlyWage}
-                    />
-                  </div>
-                );
-              })
+            ? taskers
+                .filter((tasker) => tasker.id !== user.id)
+                .map((tasker, i) => {
+                  return (
+                    <div
+                      key={i}
+                      onClick={() => getTaskerAndClientInfo(tasker)}
+                      className={"taskers-page-main-list-card"}
+                    >
+                      <HandymanHorizontalCard
+                        firstName={tasker.firstName}
+                        lastName={tasker.lastName}
+                        skills={tasker?.taskerInfo?.skills}
+                        hourlyWage={tasker?.taskerInfo?.hourlyWage}
+                      />
+                    </div>
+                  );
+                })
             : ""}
         </div>
       </div>
