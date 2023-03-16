@@ -25,13 +25,12 @@ export default function MyProfile() {
 
       try {
         const user = await res.json();
-        console.log(user);
+
         setUser(user);
       } catch (error) {
         console.log(error);
       }
     }
-
     fetchData();
   }, []);
 
@@ -65,7 +64,7 @@ export default function MyProfile() {
                 <li>
                   member since {new Date(user.registrationDate).getFullYear()}
                 </li>
-                <li>tasks given out: 14</li>
+                {/* <li>tasks given out: 14</li> */}
               </ul>
             </div>
           </div>
@@ -80,11 +79,7 @@ export default function MyProfile() {
           <div className="myprofile-reservation-container-title">
             Your upcoming tasks 📅
           </div>
-          <ReservationCard />
-          <ReservationCard />
-          <ReservationCard />
-          <ReservationCard />
-          <ReservationCard />
+          <ReservationCard userReservations={user.reservations} />
         </div>
       </div>
     </div>

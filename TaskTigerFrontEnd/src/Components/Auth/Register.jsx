@@ -83,18 +83,6 @@ export default function Register() {
           onInput={(e) => setLastName(e.target.value)}
         ></input>
 
-        <select
-          name="gender"
-          id="gender"
-          form="home-form-form"
-          onChange={(e) => setGender(e.target.value.toUpperCase())}
-        >
-          <option value="Male">Male</option>
-          <option value="Female">Female</option>
-          <option value="Other">Other</option>
-          <option value="Prefer_Not_To_Say">Prefer not to say</option>
-        </select>
-
         <input
           name="phone"
           placeholder="Your phone number"
@@ -107,23 +95,6 @@ export default function Register() {
           id="dob"
           onChange={(e) => setBirthDate(e.target.value)}
         ></input>
-
-        <div className="isTasker-checkbox">
-          <input
-            name="isTasker"
-            type={"checkbox"}
-            id="isTasker"
-            onChange={(e) => setIsTasker(e.target.checked)}
-          ></input>
-          <label htmlFor="isTasker" id="isTasker-label">
-            I want to be a Tasker!
-            <br />
-            <span style={{ fontSize: "0.7rem", color: "rgb(68,68,68)" }}>
-              This way you will be able to receive tasks and earn money! You can
-              specify your expertise on your profile page.
-            </span>
-          </label>
-        </div>
 
         <input
           name="email"
@@ -145,6 +116,35 @@ export default function Register() {
           placeholder="Your password again"
           onInput={(e) => setPasswordAgain(e.target.value)}
         />
+
+        <select
+          name="gender"
+          id="gender"
+          form="home-form-form"
+          onChange={(e) => setGender(e.target.value.toUpperCase())}
+        >
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+          <option value="Prefer_Not_To_Say">Prefer not to say</option>
+        </select>
+
+        <div className="isTasker-checkbox">
+          <input
+            name="isTasker"
+            type={"checkbox"}
+            id="isTasker"
+            onChange={(e) => setIsTasker(e.target.checked)}
+          ></input>
+          <label htmlFor="isTasker" id="isTasker-label">
+            I want to be a Tasker!
+            <br />
+            <span style={{ fontSize: "0.7rem", color: "rgb(68,68,68)" }}>
+              This way you will be able to receive tasks and earn money! You can
+              specify your expertise on your profile page.
+            </span>
+          </label>
+        </div>
 
         <input
           name="submit"

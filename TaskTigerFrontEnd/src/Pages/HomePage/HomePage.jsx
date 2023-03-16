@@ -52,22 +52,20 @@ export default function HomePage() {
                                 - Chat, pay, tip, and review all through one platform
                                 <br/>
                             </div>
-                            <div>
+                            <div className="handyman-cards">
                                 {users.map((currentUser) => {
                                     return (
-                                        <div className="handyman-cards"
-                                             key={currentUser.id}
-                                        >
                                             <HandymanCard
                                                 lastName={currentUser.lastName}
                                                 firstName={currentUser.firstName}
                                                 hourlyWage={currentUser?.taskerInfo?.hourlyWage}
                                                 skills={currentUser?.taskerInfo?.skills}
+                                                key={currentUser.id}
                                             />
-                                        </div>
+                        
                                     );
                                 })};
-                            </div>
+                                </div>
                         </div>
                       <Register />
                     </div>
