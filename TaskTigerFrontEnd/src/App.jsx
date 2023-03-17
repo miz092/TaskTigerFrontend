@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Link, Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
 import NavBar from "./Components/NavBar/NavBar";
 import AdminPage from "./Pages/AdminPage/AdminPage";
@@ -12,11 +12,12 @@ import TaskersPage from "./Pages/TaskersPage/TaskersPage";
 import ThankYouPage from "./Pages/ThankYou/thankYouPage";
 
 function App() {
+
   useEffect(() => {
     if (!window.localStorage.getItem("token"))
       window.localStorage.setItem("token", null);
-      
   }, []);
+
 
   return (
     <div className="App">

@@ -45,10 +45,10 @@ export default function NavBar() {
           </div>
         )}
 
-        <div class="slider-switch">
-          <label class="switch" htmlFor="nightmode-checkbox">
-            <input type="checkbox" id="nightmode-checkbox" />
-            <div class="slider round"></div>
+        <div className={"slider-switch"}>
+          <label className={"switch"} htmlFor={"nightmode-checkbox"}>
+            <input type={"checkbox"} id={"nightmode-checkbox"} />
+            <div className={"slider round"}></div>
           </label>
         </div>
       </nav>

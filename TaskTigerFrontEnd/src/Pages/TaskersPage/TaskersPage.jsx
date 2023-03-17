@@ -10,7 +10,7 @@ export default function TaskersPage() {
   const [filterStreet, setFilterStreet] = useState("");
   const [filterStreetNr, setStreetNr] = useState("");
   const [filterSkills, setFilterSkills] = useState([]);
-  const [filterWage, setFilterWage] = useState(0);
+  const [filterWage, setFilterWage] = useState(5);
   const [taskers, setTaskers] = useState(null);
   const [skills, setSkills] = useState([]);
   const [users, setUsers] = useState(null);
@@ -46,7 +46,7 @@ export default function TaskersPage() {
   function getTaskerAndClientInfo(tasker) {
     const dataToSend = {
       tasker: tasker,
-      jobs: filterSkills,
+      jobs: tasker.taskerInfo.skills,
     };
 
     navigate("/confirmation", { state: { data: dataToSend } });
@@ -176,7 +176,9 @@ export default function TaskersPage() {
                 type={"range"}
                 id={"filter-wage"}
                 min={5}
-                onChange={(e) => setFilterWage(e.target.value)}
+                defaultValue={5}
+                onChange={(e) => setFilterWage(e.target.value)
+                }
               />
               <div id="filter-wage-value">{filterWage}$</div>
             </div>
