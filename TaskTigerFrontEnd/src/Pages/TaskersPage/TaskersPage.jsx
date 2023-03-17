@@ -42,7 +42,7 @@ export default function TaskersPage() {
         fetchSkills();
     }, []);
 
-    async function fetchTimetableByUserId(user) {
+    async function fetchTimetableByUserId(e) {
         const response = await fetch(`/api/timeslots/${user.id}`);
         const data = await response.json();
         setOneUserTimeTable([data]);
@@ -64,13 +64,13 @@ export default function TaskersPage() {
 
     async function getTaskerAndClientInfo(tasker) {
         setSelectedUser(tasker);
-        await fetchTimetableByUserId(tasker);
+        //await fetchTimetableByUserId(tasker);
         setSelectedSlots([]);
         const dataToSend = {
             tasker: tasker,
             jobs: filterSkills,
         };
-        // navigate("/confirmation", {state: {data: dataToSend}});
+         navigate("/confirmation", {state: {data: dataToSend}});
     }
 
 

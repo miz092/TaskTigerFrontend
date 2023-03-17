@@ -31,7 +31,7 @@ export default function HandymanHorizontalCard({
           <div className="handyman-rate">⭐ 4.91 (484)</div>
         </div>
         <div className="handyman-wage-horizontal">💲 {hourlyWage} / hour</div>
-          <button onClick={() => handleShowTableButton()}>Show Timetable</button>
+          <button>Show Timetable</button>
       </div>
     </div>
   );
