@@ -9,7 +9,11 @@ export default function HandymanHorizontalCard({
   hourlyWage,
   skills,
 }) {
-  return (
+    function handleShowTableButton() {
+        console.log("hello")
+    }
+
+    return (
     <div className="handyman-card-horizontal">
       <img
         src={handymanImage}
@@ -27,7 +31,7 @@ export default function HandymanHorizontalCard({
           <div className="handyman-rate">⭐ 4.91 (484)</div>
         </div>
         <div className="handyman-wage-horizontal">💲 {hourlyWage} / hour</div>
-          <button>Show Timetable</button>
+          <button onClick={() => handleShowTableButton()}>Show Timetable</button>
       </div>
     </div>
   );

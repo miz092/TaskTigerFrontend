@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import "./TaskersPage.css";
 import HandymanHorizontalCard from "../../Components/HandymanCard/HandymanHorizontalCard";
-import { useNavigate } from "react-router-dom";
 import {useNavigate} from "react-router-dom";
 import Calendar from "../../Components/Calendar/Calendar.jsx";
 
@@ -26,21 +25,22 @@ export default function TaskersPage() {
 
     const [oneUserTimeTable, setOneUserTimeTable] = useState(null);
 
-  useEffect(() => {
-    async function fetchData() {
-      const response = await fetch("/api/users/tasker/all");
-      const data = await response.json();
-      setUsers(data);
-    }
-    async function fetchSkills() {
-      const res = await fetch("/api/users/skills");
-      const data = await res.json();
-      setSkills(data);
-    }
+    useEffect(() => {
+        async function fetchData() {
+            const response = await fetch("/api/users/tasker/all");
+            const data = await response.json();
+            setUsers(data);
+        }
 
-    fetchData();
-    fetchSkills();
-  }, []);
+        async function fetchSkills() {
+            const res = await fetch("/api/users/skills");
+            const data = await res.json();
+            setSkills(data);
+        }
+
+        fetchData();
+        fetchSkills();
+    }, []);
 
     async function fetchTimetableByUserId(user) {
         const response = await fetch(`/api/timeslots/${user.id}`);
@@ -64,36 +64,35 @@ export default function TaskersPage() {
 
     async function getTaskerAndClientInfo(tasker) {
         setSelectedUser(tasker);
-        await fetchTimetableByUserId(user);
+        await fetchTimetableByUserId(tasker);
         setSelectedSlots([]);
         const dataToSend = {
             tasker: tasker,
             jobs: filterSkills,
         };
-        navigate("/confirmation", { state: { data: dataToSend } });
+        // navigate("/confirmation", {state: {data: dataToSend}});
     }
 
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const res = await fetch(`/api/users/worktype`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+            body: JSON.stringify(filterSkills),
+        });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const res = await fetch(`/api/users/worktype`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-      body: JSON.stringify(filterSkills),
-    });
-
-    try {
-      const data = await res.json();
-      setTaskers(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+        try {
+            const data = await res.json();
+            setTaskers(data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     useEffect(() => {
         async function fetchData() {
@@ -114,6 +113,7 @@ export default function TaskersPage() {
                 console.log(error);
             }
         }
+
         fetchData();
     }, []);
     return (
@@ -269,7 +269,8 @@ export default function TaskersPage() {
                 </div>
             </div>
         </div>
-    );
+    )
+        ;
 }
 
 
