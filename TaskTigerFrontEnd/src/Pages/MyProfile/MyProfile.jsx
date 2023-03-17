@@ -19,19 +19,19 @@ export default function MyProfile() {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${localStorage.getItem("token")}`,
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
 
       try {
         const user = await res.json();
-        console.log(user);
+
         setUser(user);
+        user.role.name === "ROLE_ADMIN" ? navigate("/adminpage") : null;
       } catch (error) {
         console.log(error);
       }
     }
-
     fetchData();
   }, []);
 
@@ -65,7 +65,7 @@ export default function MyProfile() {
                 <li>
                   member since {new Date(user.registrationDate).getFullYear()}
                 </li>
-                <li>tasks given out: 14</li>
+                {/* <li>tasks given out: 14</li> */}
               </ul>
             </div>
           </div>
@@ -80,11 +80,7 @@ export default function MyProfile() {
           <div className="myprofile-reservation-container-title">
             Your upcoming tasks 📅
           </div>
-          <ReservationCard />
-          <ReservationCard />
-          <ReservationCard />
-          <ReservationCard />
-          <ReservationCard />
+          <ReservationCard userReservations={user.reservations} />
         </div>
       </div>
     </div>

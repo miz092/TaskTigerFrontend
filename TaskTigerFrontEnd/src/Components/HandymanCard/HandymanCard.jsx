@@ -13,7 +13,7 @@ export default function HandymanCard({lastName, firstName, hourlyWage, skills}) 
                 <div className="handyman-expertise">
                     {skills ? skills.map((skill,i) => {
                         return (<div key={i}>
-                                {skill}
+                                {skill.replaceAll("_", " ")}
                             </div>);
                     }) : ("")}
                     {/*<div className="handyman-rate">⭐ 4.91 (484)</div>*/}
