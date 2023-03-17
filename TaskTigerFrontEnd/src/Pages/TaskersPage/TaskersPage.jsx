@@ -15,22 +15,22 @@ export default function TaskersPage() {
     const [filterWage, setFilterWage] = useState(0);
     const [taskers, setTaskers] = useState(null);
 
-    const [oneTaskerTimeSlots, setOneTaskerTimeSlots] = useState(null);
+    const [selectedSlots, setSelectedSlots] = useState([])
+    const [selectedUser, setSelectedUser] = useState(null)
+
+    const [oneUserTimeTable, setOneUserTimeTable] = useState(null);
+
 
     const [users, setUsers] = useState(null);
     const currentClient = useState(JSON.parse(localStorage.getItem("user")));
 
     const navigate = useNavigate()
 
-    useEffect(() => {
-        async function fetchData() {
-            const response = await fetch("/api/timeSlots/1");
-            const data = await response.json();
-            setOneTaskerTimeSlots([data]);
-        }
-
-        fetchData();
-    }, []);
+    async function fetchTimetableByUserId(user) {
+        const response = await fetch(`/api/timeSlots/${user.id}`);
+        const data = await response.json();
+        setOneUserTimeTable([data]);
+    }
 
 
     useEffect(() => {
@@ -39,9 +39,12 @@ export default function TaskersPage() {
             const data = await response.json();
             setUsers(data);
         }
-
         fetchData();
     }, []);
+
+    useEffect(() => {
+        console.log("hello")
+    }, [selectedSlots]);
 
     const handleCheckbox = (e) => {
         const isChecked = e.target.checked;
@@ -49,10 +52,12 @@ export default function TaskersPage() {
         isChecked ? setFilterSkills([...filterSkills, value]) : setFilterSkills(filterSkills.filter(filterValue => filterValue !== value));
     };
 
-    function getTaskerAndClientInfo(user, currentClient) {
-        console.log(user);
-        console.log(currentClient);
-        navigate("/confirmation")
+    async function getTaskerAndClientInfo(user, currentClient) {
+        setSelectedUser(user);
+        await fetchTimetableByUserId(user);
+        // console.log(user);
+        // console.log(currentClient);
+        // navigate("/confirmation")
     }
 
     const handleSubmit = async (e) => {
@@ -74,78 +79,43 @@ export default function TaskersPage() {
             console.log(error);
         }
     };
-
-    const events =
-        [{
-            id: 1,
-            text: "true",
-            start: "2023-03-07T10:30:00",
-            end: "2023-03-07T13:00:00"
-        }];
-
-    return oneTaskerTimeSlots ? (
+    console.log(selectedSlots)
+    console.log(selectedSlots.slots)
+    // console.log(selectedSlots.slots.length)
+    console.log(selectedSlots.length)
+    console.log(oneUserTimeTable)
+    return (
         <div className="taskers-page">
             <div className="taskers-page-sidebar">
                 <div className="taskers-page-sidebar-calendar">
                     <div className="taskers-page-sidebar-calendar-title">
-                        Timetable:
+                        {selectedUser ? selectedUser.firstName + " " + selectedUser.lastName + "'s" : ""} Timetable:
                     </div>
-                    {/*<div className="taskers-page-sidebar-calendar-calendar">*/}
-                    {/*    <div className="hour">6 - 7</div>*/}
-                    {/*    <div className="day">5</div>*/}
-                    {/*    <div className="day">5</div>*/}
-                    {/*    <div className="day">5</div>*/}
-                    {/*    <div className="day">5</div>*/}
-                    {/*    <div className="day">5</div>*/}
-                    {/*    <div className="day">5</div>*/}
-                    {/*    <div className="day">5</div>*/}
-                    {/*    <div className="hour">7 - 8</div>*/}
-                    {/*    <div className="day">5</div>*/}
-                    {/*    <div className="day">5</div>*/}
-                    {/*    <div className="day">5</div>*/}
-                    {/*    <div className="day">5</div>*/}
-                    {/*    <div className="day">5</div>*/}
-                    {/*    <div className="day">5</div>*/}
-                    {/*    <div className="day">5</div>*/}
-                    {/*    <div className="hour">8 - 9</div>*/}
-                    {/*    <div className="day">5</div>*/}
-                    {/*    <div className="day">5</div>*/}
-                    {/*    <div className="day">5</div>*/}
-                    {/*    <div className="day">5</div>*/}
-                    {/*    <div className="day">5</div>*/}
-                    {/*    <div className="day">5</div>*/}
-                    {/*    <div className="day">5</div>*/}
-                    {/*    <div className="hour">9 - 10</div>*/}
-                    {/*    <div className="day">5</div>*/}
-                    {/*    <div className="day">5</div>*/}
-                    {/*    <div className="day">5</div>*/}
-                    {/*    <div className="day">5</div>*/}
-                    {/*    <div className="day">5</div>*/}
-                    {/*    <div className="day">5</div>*/}
-                    {/*    <div className="day">5</div>*/}
-                    {/*    <div className="hour">10 - 11</div>*/}
-                    {/*    <div className="day">5</div>*/}
-                    {/*    <div className="day">5</div>*/}
-                    {/*    <div className="day">5</div>*/}
-                    {/*    <div className="day">5</div>*/}
-                    {/*    <div className="day">5</div>*/}
-                    {/*    <div className="day">5</div>*/}
-                    {/*    <div className="day">5</div>*/}
-                    {/*    <div className="hour">11 - 12</div>*/}
-                    {/*    <div className="day">5</div>*/}
-                    {/*    <div className="day">5</div>*/}
-                    {/*    <div className="day">5</div>*/}
-                    {/*    <div className="day">5</div>*/}
-                    {/*    <div className="day">5</div>*/}
-                    {/*    <div className="day">5</div>*/}
-                    {/*    <div className="day">5</div>*/}
-                    {/*</div>*/}
                     <div>
-                        <Calendar
-                            props={oneTaskerTimeSlots}
-                            time={events}
-                        >
-                        </Calendar>
+                        {oneUserTimeTable ? oneUserTimeTable.map((timeTable, i) => {
+                                return (
+                                    <div key={i}>
+                                        <Calendar
+                                            events={timeTable}
+                                            slots={selectedSlots}
+                                            setSlots={setSelectedSlots}
+                                        >
+                                        </Calendar>
+                                        <div>
+                                            Selected:
+                                            {selectedSlots.length > 0 ? selectedSlots.map((slot, i) => {
+                                                    return (
+                                                        <li key={i}>
+                                                            {slot}
+                                                        </li>
+                                                    );
+                                                })
+                                                : " - "}
+                                        </div>
+                                    </div>
+                                );
+                            })
+                            : "Choose a Tasker to see the available timeslots!"}
                     </div>
                 </div>
             </div>
@@ -274,5 +244,5 @@ export default function TaskersPage() {
                 </div>
             </div>
         </div>
-    ) : "";
+    );
 }

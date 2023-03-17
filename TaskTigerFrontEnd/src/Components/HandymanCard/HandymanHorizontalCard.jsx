@@ -24,9 +24,10 @@ export default function HandymanHorizontalCard({
                 return <div key={i}>{skill.replaceAll("_", " ")}</div>;
               })
             : ""}
-          {/*<div className="handyman-rate">⭐ 4.91 (484)</div>*/}
+          <div className="handyman-rate">⭐ 4.91 (484)</div>
         </div>
         <div className="handyman-wage-horizontal">💲 {hourlyWage} / hour</div>
+          <button>Show Timetable</button>
       </div>
     </div>
   );
