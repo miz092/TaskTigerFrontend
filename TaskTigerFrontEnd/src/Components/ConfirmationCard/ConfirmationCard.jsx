@@ -53,6 +53,7 @@ export default function ConfirmationCard({ details }) {
       try {
         const user = await res.json();
         setUser(user);
+        setMessage(`Hi! My name is ${user?.firstName} ${user?.lastName}. I am looking forward to working with you!`);
       } catch (error) {
         console.log(error);
       }
@@ -62,7 +63,7 @@ export default function ConfirmationCard({ details }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    
     const res = await fetch(`api/reservation`, {
       method: "POST",
       headers: {
@@ -76,7 +77,7 @@ export default function ConfirmationCard({ details }) {
         description: description,
         workType: selectedJob,
         address: address,
-        message: message,
+        message: message.length === 0 ? `Hi! My name is ${user?.firstName} ${user?.lastName}. I am looking forward to working with you!` : message
       }),
     });
     try {
@@ -94,7 +95,10 @@ export default function ConfirmationCard({ details }) {
       <div className="confirmation-card-details">
         <div className="confirmation-details-line">
           <div className="confirmation-details-nameTag">Client:</div>
-          <div className="confirmation-details-parameter" style={{fontSize:"1.25rem"}}>
+          <div
+            className="confirmation-details-parameter"
+            style={{ fontSize: "1.25rem" }}
+          >
             <b>{user?.firstName + " " + user?.lastName}</b>
           </div>
         </div>
@@ -168,7 +172,7 @@ export default function ConfirmationCard({ details }) {
           <div className="confirmation-details-line-total">
             <div className="confirmation-details-nameTag">Total (USD):</div>
             <div className="confirmation-details-line-total-priceValue">
-            ${details?.tasker.taskerInfo.hourlyWage}
+              ${details?.tasker.taskerInfo.hourlyWage}
             </div>
           </div>
         </div>

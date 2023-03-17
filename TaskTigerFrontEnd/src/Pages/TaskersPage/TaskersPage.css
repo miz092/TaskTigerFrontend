@@ -111,6 +111,7 @@
 #filter-wage {
     width: 50%;
     margin-right: 1rem;
+    accent-color: orange;
 }
 
 #filter-wage-value {
