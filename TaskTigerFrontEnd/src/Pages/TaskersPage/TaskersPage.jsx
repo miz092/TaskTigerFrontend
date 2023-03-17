@@ -16,6 +16,7 @@ export default function TaskersPage() {
     const [taskers, setTaskers] = useState(null);
 
     const [selectedSlots, setSelectedSlots] = useState([])
+    const [timeSlotIds, setTimeSlotIds] = useState([]);
     const [selectedUser, setSelectedUser] = useState(null)
 
     const [oneUserTimeTable, setOneUserTimeTable] = useState(null);
@@ -27,7 +28,7 @@ export default function TaskersPage() {
     const navigate = useNavigate()
 
     async function fetchTimetableByUserId(user) {
-        const response = await fetch(`/api/timeSlots/${user.id}`);
+        const response = await fetch(`/api/timeslots/${user.id}`);
         const data = await response.json();
         setOneUserTimeTable([data]);
     }
@@ -39,11 +40,11 @@ export default function TaskersPage() {
             const data = await response.json();
             setUsers(data);
         }
+
         fetchData();
     }, []);
 
     useEffect(() => {
-        console.log("hello")
     }, [selectedSlots]);
 
     const handleCheckbox = (e) => {
@@ -55,9 +56,8 @@ export default function TaskersPage() {
     async function getTaskerAndClientInfo(user, currentClient) {
         setSelectedUser(user);
         await fetchTimetableByUserId(user);
-        // console.log(user);
-        // console.log(currentClient);
-        // navigate("/confirmation")
+        setSelectedSlots([]);
+
     }
 
     const handleSubmit = async (e) => {
@@ -79,11 +79,7 @@ export default function TaskersPage() {
             console.log(error);
         }
     };
-    console.log(selectedSlots)
-    console.log(selectedSlots.slots)
-    // console.log(selectedSlots.slots.length)
-    console.log(selectedSlots.length)
-    console.log(oneUserTimeTable)
+
     return (
         <div className="taskers-page">
             <div className="taskers-page-sidebar">
@@ -96,6 +92,8 @@ export default function TaskersPage() {
                                 return (
                                     <div key={i}>
                                         <Calendar
+                                            timeSlotIds={timeSlotIds}
+                                            setTimeSlotIds={setTimeSlotIds}
                                             events={timeTable}
                                             slots={selectedSlots}
                                             setSlots={setSelectedSlots}
@@ -112,6 +110,12 @@ export default function TaskersPage() {
                                                 })
                                                 : " - "}
                                         </div>
+                                        <input
+                                            name={`confirm`}
+                                            type={"submit"}
+                                            id="filter-submit-btn"
+                                            value={`Confirm ${selectedUser.firstName}'s reservation`}
+                                        />
                                     </div>
                                 );
                             })
