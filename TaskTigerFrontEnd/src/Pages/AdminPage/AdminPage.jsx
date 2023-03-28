@@ -78,7 +78,7 @@ console.log(user)
               <ul>
                 <li>{user.username}</li>
                 <li>{getAge(user.dob)}</li>
-                <li>{user.gender}</li>
+                <li>{user.gender.split("_").join(" ")}</li>
                 <li>
                   Admin since {new Date(user.registrationDate).getFullYear()}
                 </li>
