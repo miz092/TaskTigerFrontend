@@ -96,7 +96,6 @@ function ReservationPage() {
 
     const clickHandler = async (e) => {
         setStatus(e.target.value);
-
         const res = await fetch(`/api/reservation/modify/${id}`, {
             method: "PUT",
             headers: {
@@ -107,7 +106,6 @@ function ReservationPage() {
                 reservationStatus: e.target.value,
             }),
         });
-
         try {
             const isTrue = await res.json();
             if (isTrue) {
@@ -117,19 +115,34 @@ function ReservationPage() {
             console.log(error);
         }
 
-        await fetch(`/api/timeslots/tasker/reservation/modify/${id}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-            body: JSON.stringify({
-                timeSlotStatusType: "RESERVED",
-                backColor: "#5bb7c5",
-                reservationId: id
-            }),
-        });
-    };
+        if (e.target.value === "CONFIRMED") {
+            await fetch(`/api/timeslots/tasker/reservation/modify/${id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+                body: JSON.stringify({
+                    timeSlotStatusType: "RESERVED",
+                    backColor: "#5bb7c5",
+                    reservationId: id
+                }),
+            });
+        }
+        if (e.target.value === "CANCELLED") {
+            await fetch(`/api/timeslots/tasker/reservation/modify/${id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+                body: JSON.stringify({
+                    timeSlotStatusType: "FREE",
+                    backColor: "#6aa84f",
+                }),
+            });
+        }
+    }
 
     function isCurrentUserTasker() {
         return user?.tasker;
