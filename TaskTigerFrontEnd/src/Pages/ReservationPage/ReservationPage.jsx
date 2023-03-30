@@ -116,6 +116,19 @@ function ReservationPage() {
         } catch (error) {
             console.log(error);
         }
+
+        await fetch(`/api/timeslots/tasker/reservation/modify/${id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+            body: JSON.stringify({
+                timeSlotStatusType: "RESERVED",
+                backColor: "#5bb7c5",
+                reservationId: id
+            }),
+        });
     };
 
     function isCurrentUserTasker() {
@@ -172,8 +185,6 @@ function ReservationPage() {
                 return null;
         }
     }
-
-    console.log(reservation);
 
     return reservation && otherUser ? (
         <div className="reservationPage_container">
