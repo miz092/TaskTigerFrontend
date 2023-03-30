@@ -373,7 +373,7 @@ function ReservationPage() {
                     </tr>
                     <tr>
                         <td style={{fontWeight: "bold", textAlign: "left"}}>Gender:</td>
-                        <td>{otherUser.gender.replaceAll("_", " ")}}</td>
+                        <td>{otherUser.gender.replaceAll("_", " ")}</td>
                     </tr>
                     <tr>
                         <td style={{fontWeight: "bold", textAlign: "left"}}>
