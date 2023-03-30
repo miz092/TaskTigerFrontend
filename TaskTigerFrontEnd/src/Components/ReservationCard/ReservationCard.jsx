@@ -7,6 +7,7 @@ export default function ReservationCard({ userReservations }) {
   const [reservations, setReservations] = useState(userReservations);
   const navigate = useNavigate();
 console.log(reservations)
+
   return reservations ? (
     reservations.length === 0 ? (
       <div className="reservations-empty">No upcoming reservations.</div>

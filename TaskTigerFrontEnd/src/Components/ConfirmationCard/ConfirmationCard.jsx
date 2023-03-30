@@ -42,6 +42,7 @@ export default function ConfirmationCard({ details }) {
 
   useEffect(() => {
     !isLoggedIn ? navigate("/") : null;
+
     async function fetchData() {
       const res = await fetch(`/api/users/authenticate`, {
         method: "GET",
@@ -50,10 +51,12 @@ export default function ConfirmationCard({ details }) {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
+
       try {
         const user = await res.json();
         setUser(user);
         setMessage(`Hi! My name is ${user?.firstName} ${user?.lastName}. I am looking forward to working with you!`);
+        
       } catch (error) {
         console.log(error);
       }

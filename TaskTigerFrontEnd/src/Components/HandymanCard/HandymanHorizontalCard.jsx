@@ -8,13 +8,14 @@ export default function HandymanHorizontalCard({
   firstName,
   hourlyWage,
   skills,
+  keyId
 }) {
     function handleShowTableButton() {
         console.log("hello")
     }
 
     return (
-    <div className="handyman-card-horizontal">
+    <div className="handyman-card-horizontal" key={keyId}>
       <img
         src={handymanImage}
         className="handyman-card-image-horizontal"

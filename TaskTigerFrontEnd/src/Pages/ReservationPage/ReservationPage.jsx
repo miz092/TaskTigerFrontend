@@ -258,7 +258,7 @@ function ReservationPage() {
           reviewValue: ratings[key],
           workType: key,
           description: "Default review description.",
-          reservationId: reservation?.id,
+          reservationId: id,
         }),
       });
     });
@@ -343,7 +343,7 @@ function ReservationPage() {
                   <td style={{ fontWeight: "bold", textAlign: "left" }}>
                     Hourly Wage:
                   </td>
-                  <td>{otherUser.taskerInfo.hourlyWage} $</td>
+                  <td>{otherUser?.taskerInfo.hourlyWage} $</td>
                 </tr>
                 <tr>
                   <td style={{ fontWeight: "bold", textAlign: "left" }}>
@@ -351,7 +351,7 @@ function ReservationPage() {
                   </td>
                   <td>
                     <ul>
-                      {otherUser.taskerInfo.skills.map((skill, index) => (
+                      {otherUser?.taskerInfo.skills.map((skill, index) => (
                         <li key={index}>{skill.replaceAll("_", " ")}</li>
                       ))}
                     </ul>
