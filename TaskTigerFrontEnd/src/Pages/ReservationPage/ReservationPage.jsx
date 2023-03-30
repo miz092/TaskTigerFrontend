@@ -59,6 +59,7 @@ function ReservationPage() {
     }
 
     async function fetchOtherUser() {
+      // console.log(otherUserId)
       const res = await fetch(`/api/users/${otherUserId}`, {
         method: "GET",
         headers: {
@@ -69,6 +70,7 @@ function ReservationPage() {
 
       try {
         const data = await res.json();
+        // console.log(data)
         setOtherUser(data);
       } catch (error) {
         console.log(error);
@@ -183,6 +185,9 @@ function ReservationPage() {
         </div>
         <div className="reservation-detail">
           <b>Type of work:</b> {reservation?.workType.replaceAll("_", " ")}
+        </div>
+        <div className="reservation-detail">
+          <b>Duration:</b> {reservation?.duration}
         </div>
         <div className="reservation-detail">
           <b>Description:</b> {reservation?.description}

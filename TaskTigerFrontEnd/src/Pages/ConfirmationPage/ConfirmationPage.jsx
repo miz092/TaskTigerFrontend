@@ -6,7 +6,7 @@ import ConfirmationCard from "../../Components/ConfirmationCard/ConfirmationCard
 export default function ConfirmationPage() {
   const location = useLocation();
 
-  const dataRecieved = location.state?.data;
+  const dataReceived = location.state?.data;
 
-  return <ConfirmationCard details={dataRecieved} />;
+  return <ConfirmationCard details={dataReceived} />;
 }

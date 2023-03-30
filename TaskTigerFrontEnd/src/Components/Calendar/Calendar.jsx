@@ -13,39 +13,29 @@ const styles = {
     }
 };
 
+function formatDate(date) {
+    const newDate = new Date(date);
+    const year = newDate.getFullYear();
+    const month = newDate.getMonth() + 1; // Month is zero-based, so add 1 to get the correct value
+    const day = newDate.getDate();
+    return year.toString() + "-" + month.toString().padStart(2, '0') + "-" + day.toString().padStart(2, '0');
+}
+
 export default class Calendar extends Component {
 
     constructor(outsideProp) {
         super(outsideProp);
-
         this.calendarRef = React.createRef();
-
         this.state = {
             viewType: "Week",
             data: this.props.events,
-            // data: props.props[0],
             durationBarVisible: false,
-            timeRangeSelectedHandling: "Disabled",
-            // onTimeRangeSelected: async args => {
-            //     const dp = this.calendar;
-            //     const modal = await DayPilot.Modal.prompt("Create a new event:", "Event 1");
-            //     dp.clearSelection();
-            //     if (!modal.result) {
-            //         return;
-            //     }
-            //     dp.events.add({
-            //         start: args.start,
-            //         end: args.end,
-            //         id: DayPilot.guid(),
-            //         text: modal.result
-            //     });
-            // },
-            // eventDeleteHandling: "Update",
+            eventMoveHandling: "Disabled",
+            eventResizeHandling: "Disabled",
             onEventClick: async args => {
                 const dp = this.calendar;
-
                 const outsideSlotsText = this.props.slots;
-                const outsideSlotsIds = this.props.timeSlotIds;
+                const outsideSlotsIds = this.props.timeSlots;
                 if (args.e.data.backColor === "") {
                     const modal = DayPilot.Modal.alert(`This is unavailable timeslot!`, {
                         theme: "modal_rounded", okText: "OK"
@@ -63,14 +53,14 @@ export default class Calendar extends Component {
                             if (outsideProp.length === 1) {
                                 outsideProp.setSlots([]);
                             } else {
-                                let modifiedArray = outsideSlotsText.filter(item => item !== e.data.text);
+                                let modifiedArray = outsideSlotsText.filter(item => item !== formatDate(e.data.start.value) + " -- " + e.data.text);
                                 outsideProp.setSlots([...modifiedArray]);
                             }
                             if (outsideSlotsIds.length === 1) {
-                                outsideProp.setTimeSlotIds([]);
+                                outsideProp.setTimeSlots([]);
                             } else {
-                                let modifiedArrayIds = outsideSlotsIds.filter(item => item !== e.data.id);
-                                outsideProp.setTimeSlotIds([...modifiedArrayIds]);
+                                let modifiedArrayIds = outsideSlotsIds.filter(item => item !== e.data);
+                                outsideProp.setTimeSlots([...modifiedArrayIds]);
                             }
                         }
                     });
@@ -86,22 +76,21 @@ export default class Calendar extends Component {
                             e.data.reserved = true;
                             dp.events.update(e);
                             if (outsideSlotsText.length === 0) {
-                                outsideProp.setSlots([e.data.text]);
+                                outsideProp.setSlots([formatDate(e.data.start.value) + " -- " + e.data.text]);
                             } else {
                                 let slotsArray = outsideSlotsText;
-                                slotsArray.push(e.data.text);
+                                slotsArray.push(formatDate(e.data.start.value) + " -- " + e.data.text);
                                 outsideProp.setSlots([...slotsArray]);
                             }
                             if (outsideSlotsIds.length === 0) {
-                                outsideProp.setTimeSlotIds([e.data.id]);
+                                outsideProp.setTimeSlots([e.data]);
                             } else {
                                 let slotsArrayIds = outsideSlotsIds;
-                                slotsArrayIds.push(e.data.id);
-                                outsideProp.setTimeSlotIds([...slotsArrayIds]);
+                                slotsArrayIds.push(e.data);
+                                outsideProp.setTimeSlots([...slotsArrayIds]);
                             }
                         }
                     });
-
                 }
             }
         }

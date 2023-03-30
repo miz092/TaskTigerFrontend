@@ -93,6 +93,13 @@
   flex-direction: row;
   font-size: 1rem;
 }
+.confirmation-details-line-justWage {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  font-size: 1rem;
+  padding: 0.25rem;
+}
 
 .confirmation-details-line-total {
   margin-top: 0.5rem;
@@ -121,15 +128,59 @@
   background-color:green;
 }
 
+.buttonBack {
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 1rem;
+  border: thin;
+  border-radius: 3px;
+  background-color: #f87b8c;
+}
+
+.buttonBack:hover {
+  background-color: rgb(248, 166, 177);
+  color: white;
+  transition: 250ms;
+  /*border: 1px solid green;*/
+}
+
 .buttonSubmit:hover {
   background-color: greenyellow;
-  float: left;
   color: white;
   transition: 250ms;
   /*border: 1px solid green;*/
 }
 
 .buttonSubmit {
+  /*background: #FF4742;*/
+  transition: 250ms;
+  border: none;
+  border-radius: 6px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 16px;
+  line-height: 16px;
+  min-height: 40px;
+  outline: 0;
+  padding: 12px 14px;
+  text-align: center;
+  text-rendering: geometricprecision;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+}
+
+.buttonBack {
   /*background: #FF4742;*/
   transition: 250ms;
   border: none;
@@ -159,9 +210,20 @@
   color: black;
 }
 
+.buttonBack:hover,
+.buttonBack:active {
+  background-position: 0 0;
+  color: black;
+}
+
 .buttonSubmit:active {
   opacity: 0.5;
 }
+
+.buttonBack:active {
+  opacity: 0.5;
+}
+
 
 #hr {
   margin: 2rem 0;

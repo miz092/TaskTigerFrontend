@@ -11,20 +11,22 @@ export default function TaskersPage() {
     const [filterCity, setFilterCity] = useState("");
     const [filterStreet, setFilterStreet] = useState("");
     const [filterStreetNr, setStreetNr] = useState("");
-    const [filterSkills, setFilterSkills] = useState([]);
     const [filterWage, setFilterWage] = useState(5);
+
+    const [filterSkills, setFilterSkills] = useState([]);
     const [taskers, setTaskers] = useState(null);
     const [skills, setSkills] = useState([]);
     const [users, setUsers] = useState(null);
     const [user, setUser] = useState(null);
     const navigate = useNavigate();
 
-    const [selectedSlots, setSelectedSlots] = useState([])
-    const [timeSlotIds, setTimeSlotIds] = useState([]);
+    const [slotLabels, setSlotLabels] = useState([])
+    const [timeSlots, setTimeSlots] = useState([]);
     const [selectedUser, setSelectedUser] = useState(null);
     const [filterMessage, setFilterMessage] = useState("");
 
     const [oneUserTimeTable, setOneUserTimeTable] = useState(null);
+
     const filteredTaskersLength = taskers ? taskers.filter((tasker) => tasker.id !== user.id).length : 0;
 
     useEffect(() => {
@@ -44,8 +46,11 @@ export default function TaskersPage() {
         fetchSkills();
     }, []);
 
-    async function fetchTimetableByUserId(e) {
-        const response = await fetch(`/api/timeslots/${user.id}`);
+    useEffect(() => {
+    }, [slotLabels]);
+
+    async function fetchTimetableByUserId(tasker) {
+        const response = await fetch(`/api/timeslots/${tasker.id}`);
         const data = await response.json();
         setOneUserTimeTable([data]);
     }
@@ -62,14 +67,17 @@ export default function TaskersPage() {
 
     async function setTaskerToTimeTable(tasker) {
         setSelectedUser(tasker);
-        setSelectedSlots([]);
         await fetchTimetableByUserId(tasker);
+        setSlotLabels([]);
     }
 
     async function handleConfirmationBtn(tasker) {
+
         const dataToSend = {
             tasker: tasker,
             jobs: tasker.taskerInfo.skills,
+            timeslotsLabels: slotLabels,
+            timeslots: timeSlots
         };
         navigate("/confirmation", {state: {data: dataToSend}});
     }
@@ -112,7 +120,6 @@ export default function TaskersPage() {
 
             try {
                 const user = await res.json();
-
                 setUser(user);
                 user.role.name === "ROLE_ADMIN" ? navigate("/adminpage") : null;
             } catch (error) {
@@ -122,6 +129,7 @@ export default function TaskersPage() {
 
         fetchData();
     }, []);
+
     return (
         <div className="taskers-page">
             <div className="taskers-page-sidebar">
@@ -134,16 +142,16 @@ export default function TaskersPage() {
                                 return (
                                     <div key={i}>
                                         <Calendar
-                                            timeSlotIds={timeSlotIds}
-                                            setTimeSlotIds={setTimeSlotIds}
+                                            timeSlots={timeSlots}
+                                            setTimeSlots={setTimeSlots}
                                             events={timeTable}
-                                            slots={selectedSlots}
-                                            setSlots={setSelectedSlots}
+                                            slots={slotLabels}
+                                            setSlots={setSlotLabels}
                                         >
                                         </Calendar>
                                         <div>
                                             Selected:
-                                            {selectedSlots.length > 0 ? selectedSlots.map((slot, i) => {
+                                            {slotLabels.length > 0 ? slotLabels.map((slot, i) => {
                                                     return (
                                                         <li key={i}>
                                                             {slot}
