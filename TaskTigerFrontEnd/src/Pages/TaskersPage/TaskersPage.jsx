@@ -21,7 +21,9 @@ export default function TaskersPage() {
     const navigate = useNavigate();
 
     const [slotLabels, setSlotLabels] = useState([])
+    const [timeSlotsIds, setTimeSlotsIds] = useState([]);
     const [timeSlots, setTimeSlots] = useState([]);
+
     const [selectedUser, setSelectedUser] = useState(null);
     const [filterMessage, setFilterMessage] = useState("");
 
@@ -49,8 +51,8 @@ export default function TaskersPage() {
     useEffect(() => {
     }, [slotLabels]);
 
-    async function fetchTimetableByUserId(tasker) {
-        const response = await fetch(`/api/timeslots/${tasker.id}`);
+    async function fetchTimetableByTaskerId(tasker) {
+        const response = await fetch(`/api/timeslots/tasker/${tasker.id}`);
         const data = await response.json();
         setOneUserTimeTable([data]);
     }
@@ -67,17 +69,31 @@ export default function TaskersPage() {
 
     async function setTaskerToTimeTable(tasker) {
         setSelectedUser(tasker);
-        await fetchTimetableByUserId(tasker);
+        await fetchTimetableByTaskerId(tasker);
         setSlotLabels([]);
     }
 
     async function handleConfirmationBtn(tasker) {
 
+        await fetch(`/api/timeslots/tasker/slot/`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+            body: JSON.stringify({
+                timeSlotStatusType: "PENDING",
+                backColor: "",
+                slotIds: timeSlotsIds,
+            }),
+        });
+
         const dataToSend = {
             tasker: tasker,
             jobs: tasker.taskerInfo.skills,
             timeslotsLabels: slotLabels,
-            timeslots: timeSlots
+            timeslots: timeSlots,
+            timeSlotsIds: timeSlotsIds
         };
         navigate("/confirmation", {state: {data: dataToSend}});
     }
@@ -144,9 +160,11 @@ export default function TaskersPage() {
                                         <Calendar
                                             timeSlots={timeSlots}
                                             setTimeSlots={setTimeSlots}
-                                            events={timeTable}
+                                            timeSlotsIds={timeSlotsIds}
+                                            setTimeSlotsIds={setTimeSlotsIds}
                                             slots={slotLabels}
                                             setSlots={setSlotLabels}
+                                            events={timeTable}
                                         >
                                         </Calendar>
                                         <div>
