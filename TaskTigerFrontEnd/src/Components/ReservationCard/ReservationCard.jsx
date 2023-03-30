@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 export default function ReservationCard({ userReservations }) {
   const [reservations, setReservations] = useState(userReservations);
   const navigate = useNavigate();
+console.log(reservations)
 
   return reservations ? (
     reservations.length === 0 ? (
@@ -39,10 +40,10 @@ export default function ReservationCard({ userReservations }) {
                 ? "darkred"
                 : "black",
           }}>
-                    {reservation.reservationStatus}
+                    {reservation?.reservationStatus}
                   </div>
                   <div className="reservation-card-task">
-                    {reservation.workType.replaceAll("_", " ")}
+                    {reservation?.workType.replaceAll("_", " ")}
                   </div>
 
                   <div className="reservation-card-id">

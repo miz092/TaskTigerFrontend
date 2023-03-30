@@ -4,7 +4,6 @@ import HandymanHorizontalCard from "../../Components/HandymanCard/HandymanHorizo
 import {useNavigate} from "react-router-dom";
 import Calendar from "../../Components/Calendar/Calendar.jsx";
 
-
 export default function TaskersPage() {
     const [filterCountry, setFilterCountry] = useState("");
     const [filterCounty, setFilterCounty] = useState("");
@@ -29,7 +28,7 @@ export default function TaskersPage() {
 
     const [oneUserTimeTable, setOneUserTimeTable] = useState(null);
 
-    const filteredTaskersLength = taskers ? taskers.filter((tasker) => tasker.id !== user.id).length : 0;
+    const filteredTaskersLength = taskers ? taskers.filter((tasker) => tasker.id !== user.id).length : 0; //hiba
 
     useEffect(() => {
         async function fetchData() {
@@ -90,14 +89,13 @@ export default function TaskersPage() {
 
         const dataToSend = {
             tasker: tasker,
-            jobs: tasker.taskerInfo.skills,
+            jobs: tasker?.taskerInfo.skills,
             timeslotsLabels: slotLabels,
             timeslots: timeSlots,
             timeSlotsIds: timeSlotsIds
         };
         navigate("/confirmation", {state: {data: dataToSend}});
     }
-
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -113,8 +111,8 @@ export default function TaskersPage() {
 
         try {
             const data = await res.json();
-            if (data.length === 0) {
-                setTaskers(null)
+            if (filterSkills.length === 0) {
+                setTaskers(users)
             } else {
                 setTaskers(data);
             }
@@ -285,7 +283,7 @@ export default function TaskersPage() {
                         .map((tasker, i) => {
                             return (
                                 <div
-                                    key={i}
+                                    key={tasker.id}
                                     className={"taskers-page-main-list-card"}
                                 >
                                     <HandymanHorizontalCard
@@ -294,6 +292,7 @@ export default function TaskersPage() {
                                         skills={tasker?.taskerInfo?.skills}
                                         hourlyWage={tasker?.taskerInfo?.hourlyWage}
                                         handleShowTableButton={() => setTaskerToTimeTable(tasker)}
+                                        keyId={tasker.id}
                                     />
                                 </div>
                             );

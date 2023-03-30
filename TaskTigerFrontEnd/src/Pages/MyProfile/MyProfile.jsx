@@ -34,7 +34,7 @@ export default function MyProfile() {
     }
     fetchData();
   }, []);
-// console.log(user)
+
   const getAge = (birthDate) => {
     const thisDate = new Date();
     const dob = new Date(birthDate);
@@ -61,7 +61,7 @@ export default function MyProfile() {
               <ul>
                 <li>{user.username}</li>
                 <li>{getAge(user.dob)}</li>
-                <li>{user.gender}</li>
+                <li>{user.gender.replaceAll("_", " ")}</li>
                 <li>
                   member since {new Date(user.registrationDate).getFullYear()}
                 </li>
@@ -80,7 +80,11 @@ export default function MyProfile() {
           <div className="myprofile-reservation-container-title">
             Your upcoming tasks 📅
           </div>
-          <ReservationCard userReservations={ user.tasker ? user.taskerInfo.reservations : user.reservations} />
+          <ReservationCard
+            userReservations={
+              user.tasker ? user.taskerInfo.reservations : user.reservations
+            }
+          />
         </div>
       </div>
     </div>

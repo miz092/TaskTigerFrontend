@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./MessageComponent.css"
 
-const MessageComponent = ({ reservationId, currentUserId, otherUserId }) => {
+const MessageComponent = ({ reservationId, currentUserId, otherUserId, isCompleted }) => {
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
   const [reservation, setReservation] = useState(null);
@@ -82,6 +82,7 @@ const MessageComponent = ({ reservationId, currentUserId, otherUserId }) => {
         className="message-message"
         maxLength={250}
         onKeyPress={(e) => e.key === "Enter" ? sendMessage(e) : null}
+        disabled={isCompleted}
       />
       <button
         onClick={(e) => {

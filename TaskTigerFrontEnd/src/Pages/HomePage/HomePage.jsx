@@ -6,10 +6,6 @@ import Title from "../../Components/Title";
 import "./HomePage.css";
 import Loading from "../../Components/Loading/Loading.jsx";
 
-const fetchUsers = (signal) => {
-  return fetch("api/users/tasker/all", { signal }).then((res) => res.json());
-};
-
 export default function HomePage() {
   const [users, setUsers] = useState(null);
   const [user, setUser] = useState(null);
@@ -17,22 +13,23 @@ export default function HomePage() {
     localStorage.getItem("token") !== null &&
     localStorage.getItem("token") !== "null";
   const navigate = useNavigate();
-  isLoggedIn ? navigate("/myprofile") : null;
-  
-  useEffect(() => {
-    const controller = new AbortController();
 
-    fetchUsers(controller.signal)
-      .then((users) => {
+  useEffect(() => {
+    isLoggedIn ? navigate("/myprofile") : null;
+
+    async function fetchUsers() {
+      const res = await fetch("/api/users/tasker/all");
+
+      try {
+        const users = await res.json();
+
         setUsers(users);
-      })
-      .catch((error) => {
-        if (error.name !== "AbortError") {
-          setUsers(null);
-          throw error;
-        }
-      });
-    return () => controller.abort();
+      } catch (error) {
+        console.log(error);
+        setUsers(null);
+      }
+    }
+    fetchUsers();
   }, []);
 
   return (

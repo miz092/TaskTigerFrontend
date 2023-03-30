@@ -23,6 +23,9 @@ function ReservationPage() {
     const [otherUserId, setOtherUserId] = useState(0);
     const [otherUser, setOtherUser] = useState(null);
     const [status, setStatus] = useState(null);
+    const [ratings, setRatings] = useState({});
+    const [hoverRatings, setHoverRatings] = useState([0, 0]);
+    const [thankYou, setThankYou] = useState("");
 
     const isLoggedIn =
         localStorage.getItem("token") !== null &&
@@ -50,6 +53,28 @@ function ReservationPage() {
         }
     }
 
+    async function fetchReview() {
+        const res = await fetch(`/api/review/${id}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+        });
+
+        try {
+            const data = await res.json();
+            data.forEach((reviewData) => {
+                ratings[reviewData.workType] = reviewData.reviewValue;
+            });
+            Object.keys(ratings).length !== 0
+                ? setThankYou("Thank you for rating our partner! Have a nice day!")
+                : null;
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     useEffect(() => {
         !isLoggedIn ? navigate("/") : null;
 
@@ -71,7 +96,6 @@ function ReservationPage() {
         }
 
         async function fetchOtherUser() {
-            // console.log(otherUserId)
             const res = await fetch(`/api/users/${otherUserId}`, {
                 method: "GET",
                 headers: {
@@ -82,7 +106,6 @@ function ReservationPage() {
 
             try {
                 const data = await res.json();
-                // console.log(data)
                 setOtherUser(data);
             } catch (error) {
                 console.log(error);
@@ -92,6 +115,7 @@ function ReservationPage() {
         fetchData();
         fetchReservation();
         fetchOtherUser();
+        fetchReview();
     }, [id, otherUserId]);
 
     const clickHandler = async (e) => {
@@ -192,11 +216,95 @@ function ReservationPage() {
                     </>
                 );
             case "COMPLETED":
-                return <div>Reservation completed</div>;
+                return (
+                    <>
+                        <div>Reservation completed</div>
+                        <div>Please review our partner:</div>
+                        <div className="review-skills">
+                            {otherUser?.taskerInfo.skills.map((skill, skillIndex) => {
+                                return (
+                                    <div className="review-skill" key={skill}>
+                                        <b>{skill.replaceAll("_", " ")}: </b>
+                                        <div className="review-stars">
+                                            {[1, 2, 3, 4, 5].map((starIndex) => (
+                                                <span
+                                                    key={starIndex}
+                                                    className={
+                                                        starIndex <= ratings[skill]
+                                                            ? "star star-selected"
+                                                            : "star"
+                                                    }
+                                                    onClick={() => handleStarClick(skill, starIndex)}
+                                                    //   onMouseEnter={() =>
+                                                    //     handleStarHover(skillIndex, starIndex)
+                                                    //   }
+                                                    //   onMouseLeave={handleStarLeave}
+                                                >
+                          ⭐
+                        </span>
+                                            ))}
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                            {thankYou.length === 0 ? (
+                                <div className="review-send" onClick={() => handleReview()}>
+                                    Send review
+                                </div>
+                            ) : (
+                                thankYou
+                            )}
+                        </div>
+                    </>
+                );
             default:
                 return null;
         }
     }
+
+    const handleStarClick = (skill, starIndex) => {
+        if (thankYou.length !== 0) {
+            return;
+        }
+        const newRating = {};
+        newRating[skill] = starIndex;
+        setRatings((ratings) => ({
+            ...ratings,
+            ...newRating,
+        }));
+        //setHoverRatings(Object.values)
+    };
+
+// const handleStarHover = (skillIndex, starIndex) => {
+//   setHoverRatings([skillIndex, starIndex]);
+// };
+
+// const handleStarLeave = () => {
+//   setHoverRatings[0, 0]
+// };
+
+    function handleReview() {
+        Object.keys(ratings).forEach(async (key) => {
+            const res = await fetch(`/api/review`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+                body: JSON.stringify({
+                    reviewed: otherUserId,
+                    reviewer: user?.id,
+                    reviewValue: ratings[key],
+                    workType: key,
+                    description: "Default review description.",
+                    reservationId: id,
+                }),
+            });
+        });
+        setThankYou("Thank you for rating our partner! Have a nice day!");
+        return;
+    }
+
 
     return reservation && otherUser ? (
         <div className="reservationPage_container">
@@ -265,7 +373,7 @@ function ReservationPage() {
                     </tr>
                     <tr>
                         <td style={{fontWeight: "bold", textAlign: "left"}}>Gender:</td>
-                        <td>{otherUser.gender}</td>
+                        <td>{otherUser.gender.replaceAll("_", " ")}}</td>
                     </tr>
                     <tr>
                         <td style={{fontWeight: "bold", textAlign: "left"}}>
@@ -279,7 +387,7 @@ function ReservationPage() {
                                 <td style={{fontWeight: "bold", textAlign: "left"}}>
                                     Hourly Wage:
                                 </td>
-                                <td>{otherUser.taskerInfo.hourlyWage} $</td>
+                                <td>{otherUser?.taskerInfo.hourlyWage} $</td>
                             </tr>
                             <tr>
                                 <td style={{fontWeight: "bold", textAlign: "left"}}>
@@ -287,7 +395,7 @@ function ReservationPage() {
                                 </td>
                                 <td>
                                     <ul>
-                                        {otherUser.taskerInfo.skills.map((skill, index) => (
+                                        {otherUser?.taskerInfo.skills.map((skill, index) => (
                                             <li key={index}>{skill.replaceAll("_", " ")}</li>
                                         ))}
                                     </ul>
@@ -302,6 +410,7 @@ function ReservationPage() {
                 reservationId={id}
                 currentUserId={user?.id}
                 otherUserId={otherUserId}
+                isCompleted={reservation?.reservationStatus === "COMPLETED"}
             />
         </div>
     ) : (
