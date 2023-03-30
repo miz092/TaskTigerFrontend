@@ -35,20 +35,28 @@ export default class Calendar extends Component {
             onEventClick: async args => {
                 const dp = this.calendar;
                 const outsideSlotsText = this.props.slots;
-                const outsideSlotsIds = this.props.timeSlots;
-                if (args.e.data.backColor === "") {
-                    const modal = DayPilot.Modal.alert(`This is unavailable timeslot!`, {
+                const outsideSlotsIds = this.props.timeSlotsIds;
+                const outsideSlots = this.props.timeSlots;
+
+                if (args.e.data.status === "RESERVED") {
+                    const modal = DayPilot.Modal.alert(`This timeslot is reserved!`, {
                         theme: "modal_rounded", okText: "OK"
                     });
                 }
-                if (args.e.data.backColor === "#f1c232") {
+
+                if (args.e.data.status === "PENDING") {
+                    const modal = DayPilot.Modal.alert(`This timeslot has pending status!`, {
+                        theme: "modal_rounded", okText: "OK"
+                    });
+                }
+                if (args.e.data.status === "SELECTED") {
                     const modal = DayPilot.Modal.confirm(`Do you want to remove '${args.e.text()}' timeslot?`, {
                         theme: "modal_rounded", okText: "Yes", cancelText: "No"
                     }).then(function (insideArgsRemove) {
                         if (!insideArgsRemove.canceled) {
                             const e = args.e;
+                            e.data.status = "FREE";
                             e.data.backColor = "#6aa84f";
-                            e.data.reserved = false;
                             dp.events.update(e);
                             if (outsideProp.length === 1) {
                                 outsideProp.setSlots([]);
@@ -58,22 +66,25 @@ export default class Calendar extends Component {
                             }
                             if (outsideSlotsIds.length === 1) {
                                 outsideProp.setTimeSlots([]);
+                                outsideProp.setTimeSlotsIds([]);
                             } else {
-                                let modifiedArrayIds = outsideSlotsIds.filter(item => item !== e.data);
-                                outsideProp.setTimeSlots([...modifiedArrayIds]);
+                                let modifiedArrayIds = outsideSlotsIds.filter(slotId => slotId !== e.data.id);
+                                let modifiedArraySlots = outsideSlots.filter(slot => slot !== e.data);
+                                outsideProp.setTimeSlots([...modifiedArraySlots]);
+                                outsideProp.setTimeSlotsIds([...modifiedArrayIds]);
                             }
                         }
                     });
                 }
 
-                if (args.e.data.backColor === "#6aa84f") {
+                if (args.e.data.status === "FREE") {
                     const modal = DayPilot.Modal.confirm(`Do you reserve '${args.e.text()}' timeslot'?'`, {
                         theme: "modal_rounded", okText: "Yes", cancelText: "No"
                     }).then(function (insideArgs) {
                         if (!insideArgs.canceled) {
                             const e = args.e;
+                            e.data.status = "SELECTED";
                             e.data.backColor = "#f1c232";
-                            e.data.reserved = true;
                             dp.events.update(e);
                             if (outsideSlotsText.length === 0) {
                                 outsideProp.setSlots([formatDate(e.data.start.value) + " -- " + e.data.text]);
@@ -84,10 +95,14 @@ export default class Calendar extends Component {
                             }
                             if (outsideSlotsIds.length === 0) {
                                 outsideProp.setTimeSlots([e.data]);
+                                outsideProp.setTimeSlotsIds([e.data.id]);
                             } else {
                                 let slotsArrayIds = outsideSlotsIds;
-                                slotsArrayIds.push(e.data);
-                                outsideProp.setTimeSlots([...slotsArrayIds]);
+                                let slotArraySlots = outsideSlots;
+                                slotsArrayIds.push(e.data.id);
+                                slotArraySlots.push(e.data);
+                                outsideProp.setTimeSlotsIds([...slotsArrayIds]);
+                                outsideProp.setTimeSlots([...slotArraySlots]);
                             }
                         }
                     });
@@ -102,7 +117,7 @@ export default class Calendar extends Component {
 
     componentDidMount() {
         let events = this.props.events;
-        const startDate = "2023-03-12";
+        const startDate = new Date();
         this.calendar.update({startDate, events});
     }
 
@@ -113,8 +128,8 @@ export default class Calendar extends Component {
                         selectMode={"week"}
                         showMonths={1}
                         skipMonths={1}
-                        startDate={"2023-03-12"}
-                        selectionDay={"2023-03-15"}
+                        startDate={new Date()}
+                        selectionDay={new Date()}
                         events={this.props.events}
                         onTimeRangeSelected={args => {
                             this.calendar.update({
