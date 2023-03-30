@@ -163,20 +163,19 @@ function ReservationPage() {
                     <>
                         <button
                             onClick={(e) => clickHandler(e)}
+                            value={"COMPLETED"}
+                            className="reservation-detail-completed"
+                        >
+                            COMPLETE RESERVATION
+                        </button>
+                        {" "}
+                        <button
+                            onClick={(e) => clickHandler(e)}
                             value={"CANCELLED"}
                             className="reservation-detail-cancel"
                         >
                             CANCEL RESERVATION
                         </button>
-                        {" "}
-                        <button
-                            onClick={(e) => clickHandler(e)}
-                            value={"COMPLETED"}
-                            className="reservation-detail-confirm"
-                        >
-                            COMPLETE RESERVATION
-                        </button>
-                        {" "}
                     </>
                 );
             case "COMPLETED":

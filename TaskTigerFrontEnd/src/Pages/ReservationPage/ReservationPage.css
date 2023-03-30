@@ -48,6 +48,14 @@ h2 {
 
   border-radius: 5px;
 }
+
+.reservation-detail-completed {
+  background-color: darkblue;
+  color: white;
+  width: 250px;
+
+  border-radius: 5px;
+}
 .reservation-detail-cancel {
   background-color: red;
   color: white;
