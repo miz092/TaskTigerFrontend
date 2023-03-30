@@ -5,6 +5,8 @@ import {useNavigate} from "react-router-dom";
 export default function ConfirmationCard({details}) {
     const navigate = useNavigate();
     const duration = calculateTotalDurations(details?.timeslots);
+    const timeSlotIds = details?.timeSlotsIds;
+
     const [user, setUser] = useState(null);
     const [client, setClient] = useState("");
     const [address, setAddress] = useState("");
@@ -107,6 +109,20 @@ export default function ConfirmationCard({details}) {
         });
         try {
             const data = await res.json();
+            await fetch(`/api/timeslots/tasker/slot/`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+                body: JSON.stringify({
+                    timeSlotStatusType: "PENDING",
+                    backColor: "#ff6d42",
+                    slotIds: timeSlotIds,
+                    reservationId: data
+                }),
+            });
+
             navigate(`/reservation/${data}`);
         } catch (error) {
             console.log(error);
@@ -161,7 +177,7 @@ export default function ConfirmationCard({details}) {
                 </div>
                 <div className="confirmation-details-line">
                     <div className="confirmation-details-nameTag">Total slot(s) duration:</div>
-                    <div className="confirmation-details-parameter">{`${calculateTotalDurations(details?.timeslots)} hour(s)`}</div>
+                    <div className="confirmation-details-parameter">{duration} hour(s)</div>
                 </div>
                 <div className="confirmation-details-line">
                     <div className="confirmation-details-nameTag">Address:</div>
