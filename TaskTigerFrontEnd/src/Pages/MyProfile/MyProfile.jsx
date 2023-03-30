@@ -34,7 +34,7 @@ export default function MyProfile() {
     }
     fetchData();
   }, []);
-console.log(user)
+// console.log(user)
   const getAge = (birthDate) => {
     const thisDate = new Date();
     const dob = new Date(birthDate);

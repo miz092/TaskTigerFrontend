@@ -87,6 +87,7 @@ export default function ConfirmationCard({details}) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const duration = calculateTotalDurations(details?.timeslots);
         const res = await fetch(`api/reservation`, {
             method: "POST",
             headers: {
@@ -99,6 +100,7 @@ export default function ConfirmationCard({details}) {
                 tasker: details.tasker.id,
                 description: description,
                 workType: selectedJob,
+                duration: duration,
                 address: address,
                 message: message.length === 0 ? `Hi! My name is ${user?.firstName} ${user?.lastName}. I am looking forward to working with you!` : message
             }),
