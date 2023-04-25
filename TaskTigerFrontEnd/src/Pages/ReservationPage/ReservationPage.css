@@ -56,6 +56,12 @@ h2 {
   cursor: pointer;
   border-radius: 5px;
 }
+
+.reservation-detail-completed:disabled {
+  background-color: gray;
+  cursor: default;
+}
+
 .reservation-detail-cancel {
   background-color: red;
   color: white;

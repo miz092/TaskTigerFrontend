@@ -169,7 +169,7 @@ function ReservationPage() {
     }
 
     function isCurrentUserTasker() {
-        return user?.tasker;
+        return !user?.tasker;
     }
 
     function renderButtons(status, clickHandler) {
@@ -202,6 +202,7 @@ function ReservationPage() {
                             onClick={(e) => clickHandler(e)}
                             value={"COMPLETED"}
                             className="reservation-detail-completed"
+                            disabled={!isCurrentUserTasker()}
                         >
                             COMPLETE RESERVATION
                         </button>
@@ -235,10 +236,6 @@ function ReservationPage() {
                                                             : "star"
                                                     }
                                                     onClick={() => handleStarClick(skill, starIndex)}
-                                                    //   onMouseEnter={() =>
-                                                    //     handleStarHover(skillIndex, starIndex)
-                                                    //   }
-                                                    //   onMouseLeave={handleStarLeave}
                                                 >
                           ⭐
                         </span>
@@ -272,16 +269,7 @@ function ReservationPage() {
             ...ratings,
             ...newRating,
         }));
-        //setHoverRatings(Object.values)
     };
-
-// const handleStarHover = (skillIndex, starIndex) => {
-//   setHoverRatings([skillIndex, starIndex]);
-// };
-
-// const handleStarLeave = () => {
-//   setHoverRatings[0, 0]
-// };
 
     function handleReview() {
         Object.keys(ratings).forEach(async (key) => {
@@ -341,11 +329,13 @@ function ReservationPage() {
                     <b>Description:</b> {reservation?.description}
                 </div>
                 <div className="reservation-detail">
-                    <b>Total cost:</b> {`${reservation?.duration * otherUser.taskerInfo.hourlyWage} $`}
+                    <b>Total cost:</b> {`${tasker === otherUserId ? reservation?.duration * otherUser?.taskerInfo?.hourlyWage : reservation?.duration * user?.taskerInfo?.hourlyWage} $`}
                 </div>
-                {renderButtons(reservation.reservationStatus, clickHandler)}
+                {renderButtons(reservation?.reservationStatus, clickHandler)}
 
                 <hr/>
+                
+                <div className="partner-info" style={{fontWeight: "bold", fontSize: "1.2rem", textAlign: "center"}}>{isCurrentUserTasker() ? "TASKER INFO:" : "YOUR CLIENT:"}</div>
 
                 <table className="reservationPage_container_reservationDetails_table">
                     <tbody>
@@ -353,33 +343,33 @@ function ReservationPage() {
                         <td style={{fontWeight: "bold", textAlign: "left"}}>
                             First Name:
                         </td>
-                        <td>{otherUser.firstName}</td>
+                        <td>{otherUser?.firstName}</td>
                     </tr>
                     <tr>
                         <td style={{fontWeight: "bold", textAlign: "left"}}>
                             Last Name:
                         </td>
-                        <td>{otherUser.lastName}</td>
+                        <td>{otherUser?.lastName}</td>
                     </tr>
                     <tr>
                         <td style={{fontWeight: "bold", textAlign: "left"}}>Email:</td>
-                        <td>{otherUser.email}</td>
+                        <td>{otherUser?.email}</td>
                     </tr>
                     <tr>
                         <td style={{fontWeight: "bold", textAlign: "left"}}>
                             Phone Number:
                         </td>
-                        <td>{otherUser.phoneNumber}</td>
+                        <td>{otherUser?.phoneNumber}</td>
                     </tr>
                     <tr>
                         <td style={{fontWeight: "bold", textAlign: "left"}}>Gender:</td>
-                        <td>{otherUser.gender.replaceAll("_", " ")}</td>
+                        <td>{otherUser?.gender.replaceAll("_", " ")}</td>
                     </tr>
                     <tr>
                         <td style={{fontWeight: "bold", textAlign: "left"}}>
                             Age:
                         </td>
-                        <td>{getAgeDifferenceFromNow(otherUser.dob)}</td>
+                        <td>{getAgeDifferenceFromNow(otherUser?.dob)}</td>
                     </tr>
                     {isCurrentUserTasker() ? (
                         <>
@@ -387,7 +377,7 @@ function ReservationPage() {
                                 <td style={{fontWeight: "bold", textAlign: "left"}}>
                                     Hourly Wage:
                                 </td>
-                                <td>{otherUser?.taskerInfo.hourlyWage} $</td>
+                                <td>{otherUser?.taskerInfo?.hourlyWage} $</td>
                             </tr>
                             <tr>
                                 <td style={{fontWeight: "bold", textAlign: "left"}}>
@@ -395,7 +385,7 @@ function ReservationPage() {
                                 </td>
                                 <td>
                                     <ul>
-                                        {otherUser?.taskerInfo.skills.map((skill, index) => (
+                                        {otherUser?.taskerInfo?.skills.map((skill, index) => (
                                             <li key={index}>{skill.replaceAll("_", " ")}</li>
                                         ))}
                                     </ul>
