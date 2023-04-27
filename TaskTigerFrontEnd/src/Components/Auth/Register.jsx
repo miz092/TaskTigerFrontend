@@ -48,8 +48,6 @@ export default function Register() {
 
       try {
         const token = await res.text();
-        //const userData = await (await fetch("/api/users/" + user_id)).json();
-        //console.log(token)
         window.localStorage.setItem("token", token);
         navigate("/myprofile");
       } catch (error) {
@@ -64,29 +62,33 @@ export default function Register() {
   return (
     <div className="home-form">
       <div className="form-title">Register here</div>
-      <form className="home-form-form" id="home-form-form">
+      <form className="home-form-form" id="home-form-form" onSubmit={(e) => handleSubmit(e)}>
         <input
           name="name"
           placeholder="Your username"
           onInput={(e) => setUsername(e.target.value)}
+          required
         ></input>
 
         <input
           name="firstName"
           placeholder="Your first name"
           onInput={(e) => setFirstName(e.target.value)}
+          required
         ></input>
 
         <input
           name="lastName"
           placeholder="Your last name"
           onInput={(e) => setLastName(e.target.value)}
+          required
         ></input>
 
         <input
           name="phone"
           placeholder="Your phone number"
           onInput={(e) => setPhoneNumber(e.target.value)}
+          required
         ></input>
 
         <input
@@ -94,6 +96,7 @@ export default function Register() {
           type={"date"}
           id="dob"
           onChange={(e) => setBirthDate(e.target.value)}
+          required
         ></input>
 
         <input
@@ -101,6 +104,7 @@ export default function Register() {
           type={"email"}
           placeholder="Your email address"
           onInput={(e) => setEmail(e.target.value)}
+          required
         />
 
         <input
@@ -108,6 +112,7 @@ export default function Register() {
           type={"password"}
           placeholder="Your password"
           onInput={(e) => setPassword(e.target.value)}
+          required
         />
 
         <input
@@ -115,6 +120,7 @@ export default function Register() {
           type={"password"}
           placeholder="Your password again"
           onInput={(e) => setPasswordAgain(e.target.value)}
+          required
         />
 
         <select
@@ -151,7 +157,6 @@ export default function Register() {
           type={"submit"}
           id="submit-btn"
           value={"Register"}
-          onClick={(e) => handleSubmit(e)}
         />
       </form>
       <div className="error-message">{errorMessage}</div>

@@ -41,11 +41,12 @@ export default function SignInPage() {
     <div className="sign-in-page">
       <div className="sign-in-container">
         <div className="sign-in-title">Sign In</div>
-        <form className="sign-in-form" id="sign-in-form">
+        <form className="sign-in-form" id="sign-in-form" onSubmit={(e) => handleSubmit(e)}>
           <input
             name="username"
             placeholder="Your username"
             onInput={(e) => setUsername(e.target.value)}
+            required
           ></input>
 
           <input
@@ -53,6 +54,7 @@ export default function SignInPage() {
             type={"password"}
             placeholder="Your password"
             onInput={(e) => setPassword(e.target.value)}
+            required
           />
 
           <input
@@ -60,7 +62,6 @@ export default function SignInPage() {
             type={"submit"}
             id="sign-in-submit-btn"
             value={"Sign in"}
-            onClick={(e) => handleSubmit(e)}
           />
         </form>
 
