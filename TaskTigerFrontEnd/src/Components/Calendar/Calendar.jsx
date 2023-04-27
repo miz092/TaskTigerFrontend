@@ -129,11 +129,11 @@ export default class Calendar extends Component {
                         showMonths={1}
                         skipMonths={1}
                         startDate={new Date()}
-                        selectionDay={new Date()}
                         events={this.props.events}
                         onTimeRangeSelected={args => {
                             this.calendar.update({
-                                startDate: args.day, events: this.props.events
+                                startDate: args.day,
+                                events: this.props.events
                             });
                         }}
                     />
