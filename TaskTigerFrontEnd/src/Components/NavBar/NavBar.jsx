@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Title from "../Title";
 import "./NavBar.css";
 
 export default function NavBar() {
   const navigate = useNavigate();
-  
+  const [user, setUser] = useState(null);
+
   const isLoggedIn =
     localStorage.getItem("token") !== null &&
     localStorage.getItem("token") !== "null";
@@ -15,6 +16,25 @@ export default function NavBar() {
     navigate("/");
   };
 
+  useEffect(() => {
+    async function fetchData() {
+      const res = await fetch(`/api/users/authenticate`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+
+      try {
+        const user = await res.json();
+        setUser(user);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    isLoggedIn ? fetchData() : null;
+  }, []);
 
   return (
     <>
@@ -23,9 +43,13 @@ export default function NavBar() {
         <div className="nav-button" onClick={() => navigate("/myprofile")}>
           My Profile
         </div>
-        <div className="nav-button" onClick={() => navigate("/taskers")}>
-          Taskers
-        </div>
+        {user?.tasker || !isLoggedIn ? (
+          <div className="nav-button" onClick={() => navigate("/taskers")}>
+            Taskers
+          </div>
+        ) : (
+          ""
+        )}
         {isLoggedIn ? (
           <div
             className="nav-button"
