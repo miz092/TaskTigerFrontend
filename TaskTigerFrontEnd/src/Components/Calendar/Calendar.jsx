@@ -37,7 +37,6 @@ export default class Calendar extends Component {
                 const outsideSlotsText = this.props.slots;
                 const outsideSlotsIds = this.props.timeSlotsIds;
                 const outsideSlots = this.props.timeSlots;
-
                 if (args.e.data.status === "RESERVED") {
                     const modal = DayPilot.Modal.alert(`This timeslot is reserved!`, {
                         theme: "modal_rounded", okText: "OK"

@@ -74,16 +74,15 @@ export default function TaskersPage() {
 
     async function handleConfirmationBtn(tasker) {
 
-        await fetch(`/api/timeslots/tasker/slot/`, {
+        await fetch(`/api/timeslots/statusBySlotIds`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
             body: JSON.stringify({
+                timeSlotIds: timeSlotsIds,
                 timeSlotStatusType: "PENDING",
-                backColor: "",
-                slotIds: timeSlotsIds,
             }),
         });
 
@@ -104,7 +103,6 @@ export default function TaskersPage() {
             headers: {
                 "Content-Type": "application/json",
                 Accept: "application/json",
-                // Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
             body: JSON.stringify(filterSkills),
         });
