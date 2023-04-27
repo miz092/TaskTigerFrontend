@@ -6,9 +6,7 @@ import React from "react";
 export default function SignInPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState(
-    "Don't use your real passwords, the passwords on this page are not yet encrypted!"
-  );
+  const [errorMessage, setErrorMessage] = useState();
 
   const navigate = useNavigate();
 

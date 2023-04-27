@@ -12,9 +12,7 @@ export default function Register() {
   const [isTasker, setIsTasker] = useState(false);
   const [password, setPassword] = useState("");
   const [passwordAgain, setPasswordAgain] = useState("");
-  const [errorMessage, setErrorMessage] = useState(
-    "Don't use your real passwords, the passwords on this page are not yet encrypted!"
-  );
+  const [errorMessage, setErrorMessage] = useState();
 
   const navigate = useNavigate();
 

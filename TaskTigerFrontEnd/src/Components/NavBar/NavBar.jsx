@@ -34,7 +34,7 @@ export default function NavBar() {
       }
     }
     isLoggedIn ? fetchData() : null;
-  }, []);
+  }, [localStorage.getItem("token")]);
 
   return (
     <>
@@ -43,7 +43,7 @@ export default function NavBar() {
         <div className="nav-button" onClick={() => navigate("/myprofile")}>
           My Profile
         </div>
-        {user?.tasker || !isLoggedIn ? (
+        {!user?.tasker || !isLoggedIn ? (
           <div className="nav-button" onClick={() => navigate("/taskers")}>
             Taskers
           </div>
