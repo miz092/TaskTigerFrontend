@@ -109,7 +109,7 @@ export default function ConfirmationCard({details}) {
         });
         try {
             const reservationId = await res.json();
-            await fetch(`/api/timeslots/reservation`, {
+            await fetch(`/api/timeslots/reservation/add`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",

@@ -140,7 +140,7 @@ function ReservationPage() {
         }
 
         if (e.target.value === "CONFIRMED") {
-            await fetch(`/api/timeslots/reservation/`, {
+            await fetch(`/api/timeslots/reservation/set`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -153,7 +153,7 @@ function ReservationPage() {
             });
         }
         if (e.target.value === "CANCELLED") {
-            await fetch(`/api/timeslots/reservation/`, {
+            await fetch(`/api/timeslots/reservation/set`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
