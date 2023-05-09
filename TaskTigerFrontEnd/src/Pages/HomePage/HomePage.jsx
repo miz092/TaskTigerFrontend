@@ -48,11 +48,11 @@ export default function HomePage() {
                 Get time back for what you love without breaking the bank.
                 <br />
                 <br />
-                - Choose your Tasker by reviews, skills, and price
+                🌟 Choose your Tasker by reviews, skills, and price
                 <br />
-                - Schedule when it works for you — as early as today
+                📅 Schedule when it works for you — as early as today
                 <br />
-                - Chat, pay, tip, and review all through one platform
+                💬 Chat, pay, tip, and review all through one platform
                 <br />
               </div>
               <div className="handyman-cards">

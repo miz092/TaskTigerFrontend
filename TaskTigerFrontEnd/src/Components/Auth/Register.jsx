@@ -47,10 +47,14 @@ export default function Register() {
       try {
         const token = await res.text();
         window.localStorage.setItem("token", token);
+        if (localStorage.getItem("token").includes("error")) { 
+          localStorage.setItem("token", null);
+          throw "User already exists";
+        }
         navigate("/myprofile");
       } catch (error) {
         console.log(error);
-        setErrorMessage("Failed to register. Maybe username already exists?");
+        setErrorMessage("Failed to register. Maybe username or email already exists?");
       }
     } else {
       setErrorMessage("Passwords don't match!");

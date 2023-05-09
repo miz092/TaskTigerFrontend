@@ -6,7 +6,28 @@ import { useNavigate } from "react-router-dom";
 export default function ReservationCard({ userReservations }) {
   const [reservations, setReservations] = useState(userReservations);
   const navigate = useNavigate();
-console.log(reservations)
+
+  function deleteReservation(e, reservationId) {
+    e.stopPropagation();
+    
+    async function reservationDelete() {
+      const res = await fetch(`/api/reservation/${reservationId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+
+      try {
+        const success = await res.json();
+        console.log(success)
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    reservationDelete();
+  }
 
   return reservations ? (
     reservations.length === 0 ? (
@@ -52,7 +73,7 @@ console.log(reservations)
                 </div>
               </div>
             </div>
-            <div className="reservation-interaction">❌</div>
+            <div className="reservation-interaction" onClick={(e, reservationId) => deleteReservation(e, reservation.id)}>❌</div>
           </div>
         );
       })
