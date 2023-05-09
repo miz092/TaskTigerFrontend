@@ -19,6 +19,7 @@ export default function ReservationCard({ userReservations }) {
         },
       });
 
+      
       try {
         const success = await res.json();
         console.log(success)
