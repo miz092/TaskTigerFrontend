@@ -142,29 +142,28 @@ function ReservationPage() {
         }
 
         if (e.target.value === "CONFIRMED") {
-            await fetch(`/api/timeslots/tasker/reservation/modify/${id}`, {
+            await fetch(`/api/timeslots/reservation/set`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
                 body: JSON.stringify({
-                    timeSlotStatusType: "RESERVED",
-                    backColor: "#5bb7c5",
-                    reservationId: id
+                    reservationId: id,
+                    timeSlotStatusType: "RESERVED"
                 }),
             });
         }
         if (e.target.value === "CANCELLED") {
-            await fetch(`/api/timeslots/tasker/reservation/modify/${id}`, {
+            await fetch(`/api/timeslots/reservation/set`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
                 body: JSON.stringify({
-                    timeSlotStatusType: "FREE",
-                    backColor: "#6aa84f",
+                    reservationId: id,
+                    timeSlotStatusType: "FREE"
                 }),
             });
         }
