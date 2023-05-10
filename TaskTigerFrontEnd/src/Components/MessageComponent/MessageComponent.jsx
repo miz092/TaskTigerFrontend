@@ -10,7 +10,7 @@ const MessageComponent = ({ reservationId, currentUserId, otherUserId, isComplet
     async function fetchMessages() {
       try {
         const response = await fetch(
-          `/api/reservation/message/${reservationId}`,
+          `/api/message/${reservationId}`,
           {
             method: "GET",
             headers: {
@@ -31,7 +31,7 @@ const MessageComponent = ({ reservationId, currentUserId, otherUserId, isComplet
   const sendMessage = async (e) => {
     e.preventDefault();
 
-    const response = await fetch(`/api/reservation/message/${reservationId}`, {
+    const response = await fetch(`/api/message/${reservationId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

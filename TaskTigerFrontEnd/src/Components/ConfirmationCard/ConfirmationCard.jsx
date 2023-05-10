@@ -108,22 +108,20 @@ export default function ConfirmationCard({details}) {
             }),
         });
         try {
-            const data = await res.json();
-            await fetch(`/api/timeslots/tasker/slot/`, {
+            const reservationId = await res.json();
+            await fetch(`/api/timeslots/reservation/add`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
                 body: JSON.stringify({
-                    timeSlotStatusType: "PENDING",
-                    backColor: "#ff6d42",
-                    slotIds: timeSlotIds,
-                    reservationId: data
+                    timeSlotIds: timeSlotIds,
+                    reservationId: reservationId
                 }),
             });
 
-            navigate(`/reservation/${data}`);
+            navigate(`/reservation/${reservationId}`);
         } catch (error) {
             console.log(error);
         }

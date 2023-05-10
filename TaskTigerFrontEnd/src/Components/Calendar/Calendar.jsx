@@ -37,7 +37,6 @@ export default class Calendar extends Component {
                 const outsideSlotsText = this.props.slots;
                 const outsideSlotsIds = this.props.timeSlotsIds;
                 const outsideSlots = this.props.timeSlots;
-
                 if (args.e.data.status === "RESERVED") {
                     const modal = DayPilot.Modal.alert(`This timeslot is reserved!`, {
                         theme: "modal_rounded", okText: "OK"
@@ -129,11 +128,11 @@ export default class Calendar extends Component {
                         showMonths={1}
                         skipMonths={1}
                         startDate={new Date()}
-                        selectionDay={new Date()}
                         events={this.props.events}
                         onTimeRangeSelected={args => {
                             this.calendar.update({
-                                startDate: args.day, events: this.props.events
+                                startDate: args.day,
+                                events: this.props.events
                             });
                         }}
                     />
