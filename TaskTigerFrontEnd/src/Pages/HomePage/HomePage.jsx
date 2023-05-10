@@ -5,6 +5,7 @@ import HandymanCard from "../../Components/HandymanCard/HandymanCard";
 import Title from "../../Components/Title";
 import "./HomePage.css";
 import Loading from "../../Components/Loading/Loading.jsx";
+import { fetchData } from "../../util/fetch";
 
 export default function HomePage() {
   const [users, setUsers] = useState(null);
@@ -30,6 +31,7 @@ export default function HomePage() {
       }
     }
     fetchUsers();
+    fetchData("/api/users/tasker/all","", "GET", "","","");
   }, []);
 
   return (
