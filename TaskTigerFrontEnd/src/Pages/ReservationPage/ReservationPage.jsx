@@ -90,8 +90,7 @@ function ReservationPage() {
             try {
                 const user = await res.json();
                 setUser(user);
-                console.log(user.reservations.every(reserved => reserved.id == id))
-                user.reservations.every(reserved => reserved.id == id) ? null : navigate("/")
+                user.reservations.map(reserved => reserved.id == id) ? null : navigate("/")
             } catch (error) {
                 console.log(error);
             }
