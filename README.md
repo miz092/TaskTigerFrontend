@@ -3,6 +3,8 @@
 # TaskTiger 🐯
 ### A school project by our hard-working team, _SOLID_.
 
+The server works through a free service provider, so it does not run permanently. After the first request, it starts and you need to wait approximately 150 ms, then refresh the current page. You can reach the public website [here](https://tasktiger.onrender.com).
+
 <details>
   <summary>Table of Contents</summary>
   <ol>
